@@ -109,7 +109,7 @@ const editedAppointment = ref({});
 const appointmentToDelete = ref(null);
 
 const fetchAppointments = async () => {
-  const res = await axios.get('http://localhost:3000/appointments');
+  const res = await axios.get('https://fake-api-rose-psi.vercel.app/appointments');
   appointments.value = res.data;
 };
 
@@ -131,7 +131,7 @@ const openEditDialog = (appointment) => {
 
 const saveAppointment = async () => {
   if (!isValidAppointment(editedAppointment.value)) return;
-  await axios.put(`http://localhost:3000/appointments/${editedAppointment.value.id}`, editedAppointment.value);
+  await axios.put(`https://fake-api-rose-psi.vercel.app/appointments/${editedAppointment.value.id}`, editedAppointment.value);
   editVisible.value = false;
   fetchAppointments();
 };
@@ -142,7 +142,7 @@ const openDeleteDialog = (appointment) => {
 };
 
 const confirmDelete = async () => {
-  await axios.delete(`http://localhost:3000/appointments/${appointmentToDelete.value.id}`);
+  await axios.delete(`https://fake-api-rose-psi.vercel.app/appointments/${appointmentToDelete.value.id}`);
   deleteVisible.value = false;
   fetchAppointments();
 };

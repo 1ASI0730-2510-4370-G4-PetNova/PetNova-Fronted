@@ -26,7 +26,7 @@ const searchUser = async () => {
   if (!search.value.trim()) return;
   try {
     const { data } = await axios.get(
-      `http://localhost:3000/users?fullName=${search.value.trim()}`
+      `https://fake-api-rose-psi.vercel.app/clients/fullName=${search.value.trim()}`
     );
     emit('user-found', data);
     console.log('Search results:', data);

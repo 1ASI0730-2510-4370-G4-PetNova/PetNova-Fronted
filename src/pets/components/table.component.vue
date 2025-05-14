@@ -108,7 +108,7 @@ const editedPet = ref({});
 const petToDelete = ref(null);
 
 const fetchPets = async () => {
-  const res = await axios.get('http://localhost:3000/pets');
+  const res = await axios.get('https://fake-api-rose-psi.vercel.app/pets');
   pets.value = res.data;
 };
 
@@ -130,7 +130,7 @@ const openEditDialog = (pet) => {
 
 const savePet = async () => {
   if (!isValidPet(editedPet.value)) return;
-  await axios.put(`http://localhost:3000/pets/${editedPet.value.id}`, editedPet.value);
+  await axios.put(`https://fake-api-rose-psi.vercel.app/pets/${editedPet.value.id}`, editedPet.value);
   editVisible.value = false;
   fetchPets();
 };

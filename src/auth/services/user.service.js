@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/users';
+const API_URL = 'https://fake-api-rose-psi.vercel.app/users';
 
 export const getUsers = async () => {
   const response = await axios.get(API_URL);

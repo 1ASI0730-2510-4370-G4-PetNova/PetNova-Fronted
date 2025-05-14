@@ -1,5 +1,5 @@
 import axios from 'axios';
-const API_URL = 'http://localhost:3000/appointments';
+const API_URL = 'https://fake-api-rose-psi.vercel.app/appointments';
 
 export const getAppointments = () => axios.get(API_URL);
 export const searchAppointments = (query) => axios.get(`${API_URL}?fullName=${query}`);

@@ -108,7 +108,7 @@ const editedClient = ref({});
 const clientToDelete = ref(null);
 
 const fetchClients = async () => {
-  const res = await axios.get('http://localhost:3000/clients');
+  const res = await axios.get('https://fake-api-rose-psi.vercel.app/clients');
   clients.value = res.data;
 };
 
@@ -130,7 +130,7 @@ const openEditDialog = (client) => {
 
 const saveClient = async () => {
   if (!isValidClient(editedClient.value)) return;
-  await axios.put(`http://localhost:3000/clients/${editedClient.value.id}`, editedClient.value);
+  await axios.put(`https://fake-api-rose-psi.vercel.app/clients/${editedClient.value.id}`, editedClient.value);
   editVisible.value = false;
   fetchClients();
 };

@@ -1,5 +1,5 @@
 import axios from 'axios';
-const API_URL = 'http://localhost:3000/clients';
+const API_URL = 'https://fake-api-rose-psi.vercel.app/clients';
 
 export const getClients = () => axios.get(API_URL);
 export const searchClients = (query) => axios.get(`${API_URL}?fullName=${query}`);

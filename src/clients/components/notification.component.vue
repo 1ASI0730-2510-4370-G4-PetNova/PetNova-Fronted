@@ -28,7 +28,7 @@ const showNotifications = ref(false);
 watch(showNotifications, async (visible) => {
   if (visible && notifications.value.length === 0) {
     try {
-      const { data } = await axios.get('http://localhost:3000/notifications');
+      const { data } = await axios.get('https://fake-api-rose-psi.vercel.app/notifications');
       notifications.value = data;
     } catch (error) {
       console.error('Notification error:', error);
