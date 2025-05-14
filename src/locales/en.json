@@ -1,0 +1,93 @@
+{
+  "navbar": {
+    "inicio": "Home",
+    "clientes": "Clients",
+    "mascotas": "Pets",
+    "citas": "Appointments",
+    "cerrar-sesion": "Logout",
+    "legal": "Legal",
+    "terminos": "Terms and Conditions",
+    "politicas": "Privacy Policies"
+  },
+  "login": {
+    "titulo": "Login",
+    "correo": "EMAIL",
+    "contrasena": "PASSWORD",
+    "boton": "GET INTO",
+    "olvidaste": "¿Forgot your Password?"
+  },
+  "signup": {
+    "usuario-label": "User",
+    "usuario": "NAME USER",
+    "correo-label": "Email",
+    "correo": "EMAIL",
+    "contrasena-label": "Password",
+    "contrasena": "PASSWORD",
+    "boton": "SEND",
+    "options": {
+      "option1": "Vet",
+      "option2": "Client"
+    }
+  },
+  "clientes": {
+    "agregar": "Add client",
+    "nombre": "Full name",
+    "telefono": "Phone number",
+    "correo": "Email",
+    "direccion": "Adress",
+    "estado": "Status",
+    "hc": "HC",
+    "acciones": "Actions",
+    "editar": "Edit",
+    "eliminar-cliente": "Delete client",
+    "crear-cliente": "Create client",
+    "editar-cliente": "Edit cliente",
+    "eliminar": "Delete",
+    "estas-seguro": "Are you sure you want to delete this client?",
+    "no-disponible": "No data available.",
+    "cancelar": "Cancel",
+    "guardar": "Save",
+    "searcher": "Search by full name"
+  },
+  "mascotas": {
+    "agregar": "Add pet",
+    "nombre": "Pet name",
+    "cumpleanos": "Bird date",
+    "registro": "Registration date",
+    "raza": "Animal breed",
+    "genero": "Gender",
+    "hc": "HC",
+    "acciones": "Actions",
+    "editar": "Edit",
+    "elimninar-mascota": "Delete pet",
+    "crear-mascota": "Create pet",
+    "editar-mascota": "Edit pet",
+    "eliminar": "Delete",
+    "estas-seguro": "Are you sure you want to delete this pet?",
+    "no-disponible": "No data available.",
+    "cancelar": "Cancel",
+    "guardar": "Save",
+    "searcher": "Search by pet name"
+  },
+  "citas": {
+    "agregar": "Add appointment",
+    "nombre": "Nombre de la mascota",
+    "inicio": "Start date",
+    "cliente": "Client",
+    "numero": "Contact number",
+    "estado": "Status",
+    "tipo-evento": "Event type",
+    "acciones": "Actions",
+    "editar": "Edit",
+    "eliminar-cita": "Delete appointment",
+    "crear-cita": "Create appointment",
+    "editar-cita": "Edit appointment",
+    "eliminar": "Delete",
+    "estas-seguro": "Are you sure you want to delete this appointment?",
+    "no-disponible": "No data available.",
+    "cancelar": "Cancel",
+    "guardar": "Save",
+    "searcher": "Search by pet name"
+  },
+  "contactenos": "Contact us"
+}

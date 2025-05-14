@@ -1,0 +1,145 @@
+{
+  "clients": [
+    {
+      "id": "26ed",
+      "fullName": "fghkghjkghjkhjk",
+      "phone": "wer",
+      "email": "wer",
+      "address": "er",
+      "status": "erer",
+      "hc": "ert"
+    },
+    {
+      "id": "bdd9",
+      "fullName": "sdf",
+      "phone": "sdf",
+      "email": "sdf",
+      "address": "sdfs",
+      "status": "df",
+      "hc": "sdf"
+    },
+    {
+      "id": "5dec",
+      "fullName": "r",
+      "phone": "r",
+      "email": "r",
+      "address": "r",
+      "status": "r",
+      "hc": "r"
+    },
+    {
+      "id": "72e1",
+      "fullName": "sfdg",
+      "phone": "sdfg",
+      "email": "dfgdf",
+      "address": "gdf",
+      "status": "gdfg",
+      "hc": "dfgdfg"
+    }
+  ],
+  "pets": [
+    {
+      "id": "af3b",
+      "petName": "asdf",
+      "birdDate": "sdf",
+      "registrationDate": "sdf",
+      "animalBreed": "sdf",
+      "gender": "sdf",
+      "hc": "sdf"
+    },
+    {
+      "id": "0367",
+      "petName": "ety",
+      "birdDate": "rty",
+      "registrationDate": "rty",
+      "animalBreed": "ty",
+      "gender": "yui",
+      "hc": "yui"
+    },
+    {
+      "id": "a021",
+      "petName": "dfg",
+      "birdDate": "hfgh",
+      "registrationDate": "fg",
+      "animalBreed": "fgh",
+      "gender": "fgh",
+      "hc": "fgh"
+    }
+  ],
+  "users": [
+    {
+      "id": "0987",
+      "email": "ga@ga.com",
+      "user": "emasdfsdfail",
+      "password": "ga",
+      "role": "admin"
+    },
+    {
+      "id": "98e6",
+      "email": "asdfasd@gmailcom",
+      "user": "asdf",
+      "password": "123",
+      "role": "client"
+    },
+    {
+      "id": "b869",
+      "email": "a@a",
+      "user": "a",
+      "password": "a",
+      "role": "admin"
+    },
+    {
+      "id": "f4b0",
+      "email": "b@b",
+      "user": "b",
+      "password": "b",
+      "role": "admin"
+    },
+    {
+      "id": "1b24",
+      "email": "123@123",
+      "user": "123",
+      "password": "123",
+      "role": "admin"
+    },
+    {
+      "id": "dcf4",
+      "email": "diego@gmail.com",
+      "user": "diego",
+      "password": "123",
+      "role": "admin"
+    }
+  ],
+  "appointments": [
+    {
+      "id": "f027",
+      "petName": "dfh",
+      "startDate": "fgh",
+      "client": "fgh",
+      "contactNumber": "fgh",
+      "status": "fgh",
+      "eventType": "fgh"
+    },
+    {
+      "id": "54d6",
+      "petName": "ghj",
+      "startDate": "ghj",
+      "client": "ghj",
+      "contactNumber": "ghj",
+      "status": "ghj",
+      "eventType": "ghj"
+    }
+  ],
+  "notifications": [
+    {
+      "id": "1",
+      "description": "This is the first notification.",
+      "date": "2023-10-01"
+    },
+    {
+      "id": "2",
+      "description": "This is the second notification.",
+      "date": "2023-10-02"
+    }
+  ]
+}

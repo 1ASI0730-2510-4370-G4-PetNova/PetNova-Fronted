@@ -1,0 +1,93 @@
+{
+  "navbar": {
+    "inicio": "Inicio",
+    "clientes": "Clientes",
+    "mascotas": "Mascotas",
+    "citas": "Citas",
+    "cerrar-sesion": "Cerrar sesión",
+    "legal": "Legal",
+    "terminos": "Términos y condiciones",
+    "politicas": "Politicas de Privacidad"
+  },
+  "login": {
+    "titulo": "Iniciar Sesion",
+    "correo": "CORREO ELECTRONICO",
+    "contrasena": "CONTRASEÑA",
+    "boton": "Ingresar",
+    "olvidaste": "¿Olvidaste tu contraseña?"
+  },
+  "signup": {
+    "usuario-label": "Usuario",
+    "usuario": "NONBRE DE USUARIO",
+    "correo-label": "Correo",
+    "correo": "CORREO ELECTRONICO",
+    "contrasena-label": "Contraseña",
+    "contrasena": "CONTRASEÑA",
+    "boton": "ENVIAR",
+    "options": {
+      "option1": "Vet",
+      "option2": "Client"
+    }
+  },
+  "clientes": {
+    "agregar": "Agregar cliente",
+    "nombre": "Nombre Completo",
+    "telefono": "Telefono",
+    "correo": "Correo",
+    "direccion": "Direccion",
+    "estado": "Estado",
+    "hc": "HC",
+    "acciones": "Aciones",
+    "editar": "Editar",
+    "eliminar-cliente": "Eliminar cliente",
+    "crear-cliente": "Crear cliente",
+    "editar-cliente": "Editar cliente",
+    "eliminar": "Eliminar",
+    "estas-seguro": "¿Estás seguro que quieres eliminar este cliente?",
+    "no-disponible": "Data no disponible.",
+    "cancelar": "Cancelar",
+    "guardar": "Guardar",
+    "searcher": "Buscar por nombre completo"
+  },
+  "mascotas": {
+    "agregar": "Agregar mascota",
+    "nombre": "Nombre de la mascota",
+    "cumpleanos": "Cumpleaños",
+    "registro": "Fecha de registro",
+    "raza": "Raza",
+    "hc": "HC",
+    "genero": "Genero",
+    "acciones": "Aciones",
+    "editar": "Editar",
+    "eliminar-mascota": "Eliminar mascota",
+    "crear-mascota": "Crear mascota",
+    "editar-mascota": "Editar mascota",
+    "eliminar": "Eliminar",
+    "estas-seguro": "¿Estás seguro que quieres eliminar esta mascota?",
+    "no-disponible": "Data no disponible.",
+    "cancelar": "Cancelar",
+    "guardar": "Guardar",
+    "searcher": "Buscar por nombre de la mascota"
+  },
+  "citas": {
+    "agregar": "Agregar cita",
+    "nombre": "Nombre de la mascota",
+    "inicio": "Fecha de inicio",
+    "cliente": "Cliente",
+    "numero": "Numero de contacto",
+    "estado": "Estado",
+    "tipo-evento": "Tipo de evento",
+    "acciones": "Aciones",
+    "editar": "Editar",
+    "eliminar-cita": "Eliminar cita",
+    "crear-cita": "Crear cita",
+    "editar-cita": "Editar cita",
+    "eliminar": "Eliminar",
+    "estas-seguro": "¿Estás seguro que quieres eliminar esta cita?",
+    "no-disponible": "Data no disponible.",
+    "cancelar": "Cancelar",
+    "guardar": "Guardar",
+    "searcher": "Buscar por nombre completo"
+  },
+  "contactenos": "Contactenos"
+}
