@@ -16,11 +16,11 @@
 </template>
 
 <script setup>
-import { ref, defineEmits } from 'vue';
-import axios from 'axios';
+import { ref, defineEmits } from "vue";
+import axios from "axios";
 
-const search = ref('');
-const emit = defineEmits(['user-found']);
+const search = ref("");
+const emit = defineEmits(["user-found"]);
 
 const searchUser = async () => {
   if (!search.value.trim()) return;
@@ -28,10 +28,10 @@ const searchUser = async () => {
     const { data } = await axios.get(
       `https://fake-api-rose-psi.vercel.app/clients/fullName=${search.value.trim()}`
     );
-    emit('user-found', data);
-    console.log('Search results:', data);
+    emit("user-found", data);
+    console.log("Search results:", data);
   } catch (error) {
-    console.error('Search error:', error);
+    console.error("Search error:", error);
   }
 };
 </script>
