@@ -2,7 +2,7 @@
   <div
     @mouseenter="showNotifications = true"
     @mouseleave="showNotifications = false"
-    style="display: inline-block; position: relative;"
+    style="display: inline-block; position: relative"
   >
     <img
       src="../../assets/images/notification-icon.png"
@@ -19,8 +19,8 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
-import axios from 'axios';
+import { ref, watch } from "vue";
+import axios from "axios";
 
 const notifications = ref([]);
 const showNotifications = ref(false);
@@ -28,10 +28,12 @@ const showNotifications = ref(false);
 watch(showNotifications, async (visible) => {
   if (visible && notifications.value.length === 0) {
     try {
-      const { data } = await axios.get('https://fake-api-rose-psi.vercel.app/notifications');
+      const { data } = await axios.get(
+        "https://fake-api-rose-psi.vercel.app/notifications"
+      );
       notifications.value = data;
     } catch (error) {
-      console.error('Notification error:', error);
+      console.error("Notification error:", error);
     }
   }
 });
