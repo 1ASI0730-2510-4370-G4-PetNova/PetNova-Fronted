@@ -12,58 +12,73 @@
       </section>
       <TableComponent :clients="filteredClients" :search="search" />
     </section>
-    <PvDialog v-model:visible="createVisible" modal :header="$t('clientes.crear-cliente')" :style="{ width: '25rem' }">
+    <PvDialog
+      v-model:visible="createVisible"
+      modal
+      :header="$t('clientes.crear-cliente')"
+      :style="{ width: '25rem' }"
+    >
       <section>
         <section class="flex flex-column mb-1">
-          <label>{{ $t('clientes.nombre') }}</label>
+          <label>{{ $t("clientes.nombre") }}</label>
           <PvInputText v-model="newClient.fullName" class="flex-auto" />
         </section>
         <section class="flex flex-column mb-1">
-          <label>{{ $t('clientes.telefono') }}</label>
+          <label>{{ $t("clientes.telefono") }}</label>
           <PvInputText v-model="newClient.phone" class="flex-auto" />
         </section>
         <section class="flex flex-column mb-1">
-          <label>{{ $t('clientes.correo') }}</label>
+          <label>{{ $t("clientes.correo") }}</label>
           <PvInputText v-model="newClient.email" class="flex-auto" />
         </section>
         <section class="flex flex-column mb-1">
-          <label>{{ $t('clientes.direccion') }}</label>
+          <label>{{ $t("clientes.direccion") }}</label>
           <PvInputText v-model="newClient.address" class="flex-auto" />
         </section>
         <section class="flex flex-column mb-1">
-          <label>{{ $t('clientes.estado') }}</label>
+          <label>{{ $t("clientes.estado") }}</label>
           <PvInputText v-model="newClient.status" class="flex-auto" />
         </section>
         <section class="flex flex-column">
-          <label>{{ $t('clientes.hc') }}</label>
+          <label>{{ $t("clientes.hc") }}</label>
           <PvInputText v-model="newClient.hc" class="flex-auto" />
         </section>
       </section>
       <template #footer>
-        <PvButton :label="$t('clientes.cancelar')"  text severity="secondary" @click="createVisible = false" />
-        <PvButton :label="$t('clientes.guardar')" outlined severity="danger" @click="createClient" :disabled="!isValidClient(newClient)" />
+        <PvButton
+          :label="$t('clientes.cancelar')"
+          text
+          severity="secondary"
+          @click="createVisible = false"
+        />
+        <PvButton
+          :label="$t('clientes.guardar')"
+          outlined
+          severity="danger"
+          @click="createClient"
+          :disabled="!isValidClient(newClient)"
+        />
       </template>
     </PvDialog>
   </article>
 </template>
 
-
 <script setup>
-import { ref } from 'vue';
-import { createClient as createClientService} from '../services/client.service';
-import Client from '../models/client.model';
+import { ref } from "vue";
+import { createClient as createClientService } from "../services/client.service";
+import Client from "../models/client.model";
 
-import MenuComponent from '../../shared/components/menu.component.vue';
-import TableComponent from '../components/table.component.vue';
-import Searcher from '../components/searcher.component.vue';
-import Button from '../components/button.component.vue';
-import Notification from '../components/notification.component.vue';
-import LanguageSwitch from '../../shared/components/language-switcher.component.vue';
+import MenuComponent from "../../shared/components/menu.component.vue";
+import TableComponent from "../components/table.component.vue";
+import Searcher from "../components/searcher.component.vue";
+import Button from "../components/button.component.vue";
+import Notification from "../components/notification.component.vue";
+import LanguageSwitch from "../../shared/components/language-switcher.component.vue";
 
 const createVisible = ref(false);
 const newClient = ref(new Client());
 const filteredClients = ref([]);
-const search = ref('');
+const search = ref("");
 
 const isValidClient = (client) => Client.isValid(client);
 
@@ -74,7 +89,7 @@ const openAddDialog = () => {
 const createClient = async () => {
   if (!isValidClient(newClient.value)) return;
   await createClientService(newClient.value);
-  window.location.reload()
+  window.location.reload();
   createVisible.value = false;
   newClient.value = new Client();
 };
@@ -83,8 +98,6 @@ const handleSearchResults = (results) => {
   filteredClients.value = results;
 };
 </script>
-
-
 
 <style scoped>
 article {
