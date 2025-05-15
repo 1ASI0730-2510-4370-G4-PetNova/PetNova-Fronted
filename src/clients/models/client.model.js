@@ -1,5 +1,12 @@
 export default class Client {
-  constructor({ fullName = '', phone = '', email = '', address = '', status = '', hc = '' } = {}) {
+  constructor({
+    fullName = "",
+    phone = "",
+    email = "",
+    address = "",
+    status = "",
+    hc = "",
+  } = {}) {
     this.fullName = fullName;
     this.phone = phone;
     this.email = email;
