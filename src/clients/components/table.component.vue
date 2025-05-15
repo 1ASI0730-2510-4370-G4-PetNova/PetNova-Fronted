@@ -2,104 +2,162 @@
   <table>
     <thead>
       <tr>
-        <th>{{ $t('clientes.nombre') }}</th>
-        <th>{{ $t('clientes.telefono') }}</th>
-        <th>{{ $t('clientes.correo') }}</th>
-        <th>{{ $t('clientes.direccion') }}</th>
-        <th>{{ $t('clientes.estado') }}</th>
-        <th>{{ $t('clientes.hc') }}</th>
-        <th>{{ $t('clientes.acciones') }}</th>
+        <th>{{ $t("clientes.nombre") }}</th>
+        <th>{{ $t("clientes.telefono") }}</th>
+        <th>{{ $t("clientes.correo") }}</th>
+        <th>{{ $t("clientes.direccion") }}</th>
+        <th>{{ $t("clientes.estado") }}</th>
+        <th>{{ $t("clientes.hc") }}</th>
+        <th>{{ $t("clientes.acciones") }}</th>
       </tr>
     </thead>
     <tbody>
-  <tr v-if="paginatedClients.length === 0">
-    <td colspan="8" class="no-data">{{ $t('clientes.no-disponible') }}</td>
-  </tr>
-  <tr v-for="client in paginatedClients" :key="client.id">
-    <td>
-      <section class="avatar-container">
-        <img src="../../assets/images/register-image.png" alt="avatar" class="avatar" />
-        {{ client.fullName }}
-      </section>
-    </td>
-    <td>{{ client.phone }}</td>
-    <td>{{ client.email }}</td>
-    <td>{{ client.address }}</td>
-    <td>{{ client.status }}</td>
-    <td>{{ client.hc }}</td>
-    <td class="label-actions">
-      <span @click="openEditDialog(client)" class="label-edit-action">
-        <span>{{ $t('clientes.editar') }}</span>
-        <img src="../../assets/images/edit-table.icon.png" alt="edit" class="action-icon" />
-      </span>
-      <span @click="openDeleteDialog(client)" class="label-delete-action">
-        <img src="../../assets/images/delete-table-icon.png" alt="delete" class="action-icon" />
-      </span>
-    </td>
-  </tr>
-</tbody>
+      <tr v-if="paginatedClients.length === 0">
+        <td colspan="8" class="no-data">{{ $t("clientes.no-disponible") }}</td>
+      </tr>
+      <tr v-for="client in paginatedClients" :key="client.id">
+        <td>
+          <section class="avatar-container">
+            <img
+              src="../../assets/images/register-image.png"
+              alt="avatar"
+              class="avatar"
+            />
+            {{ client.fullName }}
+          </section>
+        </td>
+        <td>{{ client.phone }}</td>
+        <td>{{ client.email }}</td>
+        <td>{{ client.address }}</td>
+        <td>{{ client.status }}</td>
+        <td>{{ client.hc }}</td>
+        <td class="label-actions">
+          <span @click="openEditDialog(client)" class="label-edit-action">
+            <span>{{ $t("clientes.editar") }}</span>
+            <img
+              src="../../assets/images/edit-table.icon.png"
+              alt="edit"
+              class="action-icon"
+            />
+          </span>
+          <span @click="openDeleteDialog(client)" class="label-delete-action">
+            <img
+              src="../../assets/images/delete-table-icon.png"
+              alt="delete"
+              class="action-icon"
+            />
+          </span>
+        </td>
+      </tr>
+    </tbody>
   </table>
 
   <section class="pagination">
     <section @click="prevPage">
-      <img src="../../assets/images/left-icon.png" alt="left icon" class="icons-pagination" />
+      <img
+        src="../../assets/images/left-icon.png"
+        alt="left icon"
+        class="icons-pagination"
+      />
     </section>
-    <section v-for="page in totalPages" :key="page" @click="currentPage = page" class="pagination-item">
+    <section
+      v-for="page in totalPages"
+      :key="page"
+      @click="currentPage = page"
+      class="pagination-item"
+    >
       {{ page }}
     </section>
     <section @click="nextPage">
-      <img src="../../assets/images/rigth-icon.png" alt="right icon" class="icons-pagination" />
+      <img
+        src="../../assets/images/rigth-icon.png"
+        alt="right icon"
+        class="icons-pagination"
+      />
     </section>
   </section>
 
-  <PvDialog v-model:visible="editVisible" modal :header="$t('clientes.editar-cliente')" :style="{ width: '25rem' }">
+  <PvDialog
+    v-model:visible="editVisible"
+    modal
+    :header="$t('clientes.editar-cliente')"
+    :style="{ width: '25rem' }"
+  >
     <section>
       <section class="flex flex-column mb-1">
-        <label>{{ $t('clientes.nombre') }}</label>
+        <label>{{ $t("clientes.nombre") }}</label>
         <PvInputText v-model="editedClient.fullName" class="flex-auto" />
       </section>
       <section class="flex flex-column mb-1">
-        <label>{{ $t('clientes.telefono') }}</label>
+        <label>{{ $t("clientes.telefono") }}</label>
         <PvInputText v-model="editedClient.phone" class="flex-auto" />
       </section>
       <section class="flex flex-column mb-1">
-        <label>{{ $t('clientes.correo') }}</label>
+        <label>{{ $t("clientes.correo") }}</label>
         <PvInputText v-model="editedClient.email" class="flex-auto" />
       </section>
       <section class="flex flex-column mb-1">
-        <label>{{ $t('clientes.direccion') }}</label>
+        <label>{{ $t("clientes.direccion") }}</label>
         <PvInputText v-model="editedClient.address" class="flex-auto" />
       </section>
       <section class="flex flex-column mb-1">
-        <label>{{ $t('clientes.estado') }}</label>
+        <label>{{ $t("clientes.estado") }}</label>
         <PvInputText v-model="editedClient.status" class="flex-auto" />
       </section>
       <section class="flex flex-column">
-        <label>{{ $t('clientes.hc') }}</label>
+        <label>{{ $t("clientes.hc") }}</label>
         <PvInputText v-model="editedClient.hc" class="flex-auto" />
       </section>
     </section>
     <template #footer>
-      <PvButton :label="$t('clientes.cancelar')" text severity="secondary" @click="editVisible = false" />
-      <PvButton :label="$t('clientes.guardar')" outlined severity="danger" @click="saveClient" :disabled="!isValidClient(editedClient)" />
+      <PvButton
+        :label="$t('clientes.cancelar')"
+        text
+        severity="secondary"
+        @click="editVisible = false"
+      />
+      <PvButton
+        :label="$t('clientes.guardar')"
+        outlined
+        severity="danger"
+        @click="saveClient"
+        :disabled="!isValidClient(editedClient)"
+      />
     </template>
   </PvDialog>
 
-  <PvDialog v-model:visible="deleteVisible" modal :header="$t('clientes.eliminar-cliente')" :style="{ width: '25rem' }">
-    <span class="text-surface-500 dark:text-surface-400 block">{{ $t('clientes.estas-seguro') }}</span>
+  <PvDialog
+    v-model:visible="deleteVisible"
+    modal
+    :header="$t('clientes.eliminar-cliente')"
+    :style="{ width: '25rem' }"
+  >
+    <span class="text-surface-500 dark:text-surface-400 block">{{
+      $t("clientes.estas-seguro")
+    }}</span>
     <template #footer>
-      <PvButton :label="$t('clientes.cancelar')" text severity="secondary" @click="deleteVisible = false" />
-      <PvButton :label="$t('clientes.eliminar')" outlined severity="danger" @click="confirmDelete" />
+      <PvButton
+        :label="$t('clientes.cancelar')"
+        text
+        severity="secondary"
+        @click="deleteVisible = false"
+      />
+      <PvButton
+        :label="$t('clientes.eliminar')"
+        outlined
+        severity="danger"
+        @click="confirmDelete"
+      />
     </template>
   </PvDialog>
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
-import axios from 'axios';
+import { ref, computed, onMounted } from "vue";
+import axios from "axios";
 
 const clients = ref([]);
-const search = ref('');
+const search = ref("");
 const currentPage = ref(1);
 const perPage = 5;
 const editVisible = ref(false);
@@ -108,20 +166,36 @@ const editedClient = ref({});
 const clientToDelete = ref(null);
 
 const fetchClients = async () => {
-  const res = await axios.get('https://fake-api-rose-psi.vercel.app/clients');
+  const res = await axios.get("https://fake-api-rose-psi.vercel.app/clients");
   clients.value = res.data;
 };
 
 const isValidClient = (client) => {
-  return client.fullName && client.phone && client.email && client.address && client.status && client.hc;
+  return (
+    client.fullName &&
+    client.phone &&
+    client.email &&
+    client.address &&
+    client.status &&
+    client.hc
+  );
 };
 
 const filteredClients = computed(() => {
-  return clients.value.filter(client => client.fullName.toLowerCase().includes(search.value.toLowerCase()));
+  return clients.value.filter((client) =>
+    client.fullName.toLowerCase().includes(search.value.toLowerCase())
+  );
 });
 
-const totalPages = computed(() => Math.ceil(filteredClients.value.length / perPage));
-const paginatedClients = computed(() => filteredClients.value.slice((currentPage.value - 1) * perPage, currentPage.value * perPage));
+const totalPages = computed(() =>
+  Math.ceil(filteredClients.value.length / perPage)
+);
+const paginatedClients = computed(() =>
+  filteredClients.value.slice(
+    (currentPage.value - 1) * perPage,
+    currentPage.value * perPage
+  )
+);
 
 const openEditDialog = (client) => {
   editedClient.value = { ...client };
@@ -130,7 +204,10 @@ const openEditDialog = (client) => {
 
 const saveClient = async () => {
   if (!isValidClient(editedClient.value)) return;
-  await axios.put(`https://fake-api-rose-psi.vercel.app/clients/${editedClient.value.id}`, editedClient.value);
+  await axios.put(
+    `https://fake-api-rose-psi.vercel.app/clients/${editedClient.value.id}`,
+    editedClient.value
+  );
   editVisible.value = false;
   fetchClients();
 };
@@ -141,7 +218,9 @@ const openDeleteDialog = (client) => {
 };
 
 const confirmDelete = async () => {
-  await axios.delete(`http://localhost:3000/clients/${clientToDelete.value.id}`);
+  await axios.delete(
+    `http://localhost:3000/clients/${clientToDelete.value.id}`
+  );
   deleteVisible.value = false;
   fetchClients();
 };
@@ -156,7 +235,6 @@ const nextPage = () => {
 
 onMounted(fetchClients);
 </script>
-
 
 <style scoped>
 table {
@@ -209,7 +287,7 @@ tr {
   justify-content: center;
   width: 70%;
   margin: auto;
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   padding: 10px 1px;
   border-radius: 12px;
 }
@@ -263,7 +341,7 @@ tr {
   margin-right: 16px;
   justify-content: center;
   align-items: center;
-  background-color: #6ABFE3;
+  background-color: #6abfe3;
   color: white;
   font-size: 40px;
 }
