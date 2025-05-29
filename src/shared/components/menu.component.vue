@@ -7,7 +7,7 @@ import {$t} from "@primeuix/styled";
         <section class="menu-header">
             <img src="../../assets/images/navbar-person.png" alt="person" class="navbar-person">
             <ul>
-                <router-link to="/clients" class="routering">
+                <router-link to="/start" class="routering">
                     <li class="li-primary-options">
                         <img src="../../assets/images/navbar-start-icon.png" alt="start">
                         <span class="li-primary-options-text">{{ $t('navbar.inicio') }}</span>
