@@ -26,15 +26,6 @@
       "address": "r",
       "status": "r",
       "hc": "r"
-    },
-    {
-      "id": "72e1",
-      "fullName": "sfdg",
-      "phone": "sdfg",
-      "email": "dfgdf",
-      "address": "gdf",
-      "status": "gdfg",
-      "hc": "dfgdfg"
     }
   ],
   "pets": [
