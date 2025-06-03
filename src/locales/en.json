@@ -49,6 +49,16 @@
     "guardar": "Save",
     "searcher": "Search by full name"
   },
+  "dashboard": {
+    "vitalStatus": "Vital Status",
+    "appointmentsToday": "Appointments Today",
+    "collarStatus": "Collar Status",
+    "realTimeLocation": "Real-Time Location",
+    "check-up": "Check-up",
+    "surgery": "Surgery",
+    "vaccination": "Vaccination"
+  },
+
   "mascotas": {
     "agregar": "Add pet",
     "nombre": "Pet name",
