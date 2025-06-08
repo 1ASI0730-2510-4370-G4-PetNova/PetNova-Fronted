@@ -5,7 +5,10 @@ import {$t} from "@primeuix/styled";
 <template>
     <section class="menu-container">
         <section class="menu-header">
-            <img src="../../assets/images/navbar-person.png" alt="person" class="navbar-person">
+            <!-- Convertimos la imagen de perfil en un router-link -->
+            <router-link to="/profile" class="routering">
+                <img src="../../assets/images/navbar-person.png" alt="profile" class="navbar-person">
+            </router-link>
             <ul>
                 <router-link to="/clients" class="routering">
                     <li class="li-primary-options">
@@ -86,6 +89,7 @@ import {$t} from "@primeuix/styled";
 
 .navbar-person {
     width: 150px;
+    cursor: pointer; /* Cambié a pointer para dar la sensación de botón */
 }
 
 ul {
