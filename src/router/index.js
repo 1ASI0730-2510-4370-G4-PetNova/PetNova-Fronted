@@ -5,11 +5,13 @@ import clients from '../vet/clients/pages/clients.component.vue';
 import pets from '../vet/pets/pages/pets.component.vue';
 import appointments from '../vet/appointments/pages/appointments.component.vue';
 import dashboard from '../client/dashboard/pages/dashboardpage.component.vue';
+import dashvet from '../vet/dashboard/pages/dashvet.component.vue';
 
 const routes = [
     { path: '/', component: loginComponent },
     { path: '/register', component: registerComponent },
     { path: '/dashboard', component: dashboard },
+    { path: '/dashboard/vet', component: dashvet },
     { path: '/clients', component: clients },
     { path: '/pets', component: pets },
     { path: '/appointments', component: appointments },
