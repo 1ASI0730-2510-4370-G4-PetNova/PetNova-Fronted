@@ -5,6 +5,9 @@ import clients from '@/vet/clients/pages/clients.component.vue';
 import pets from '@/vet/pets/pages/pets.component.vue';
 import appointments from '@/vet/appointments/pages/appointments.component.vue';
 import profileComponent from '@/vet/profile/pages/profile.component.vue';
+import petsClients from '@/client/pets/pages/pets.component.vue';
+import appointmentsClients from '@/client/appointments/pages/appointments.component.vue';
+import profileComponentClients from '@/client/profile/pages/profile.component.vue';
 
 
 const routes = [
@@ -14,6 +17,9 @@ const routes = [
     { path: '/pets', component: pets },
     { path: '/appointments', component: appointments },
     { path: '/profile', component: profileComponent },
+    { path: '/petsClients', component: petsClients },
+    { path: '/appointmentsClients', component: appointmentsClients},
+    { path: '/profileClients', component: profileComponentClients },
 ];
 
 const router = createRouter({

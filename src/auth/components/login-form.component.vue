@@ -46,7 +46,7 @@ const handleLogin = async () => {
     if (foundUser) {
       // Si el rol es 'client', redirige a la página de clientes
       if (foundUser.role === 'client') {
-        router.push('/profile');  // Redirige al dashboard del cliente
+        router.push('/profileClients');  // Redirige al dashboard del cliente
       }
       // Si el rol es 'admin' o 'vet', redirige a la misma página (por ejemplo, /admin-vet-dashboard)
       else if (foundUser.role === 'admin' || foundUser.role === 'vet') {

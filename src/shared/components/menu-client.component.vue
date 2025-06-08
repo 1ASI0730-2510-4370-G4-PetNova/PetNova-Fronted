@@ -6,23 +6,23 @@ import {$t} from "@primeuix/styled";
     <section class="menu-container">
         <section class="menu-header">
             <!-- Convertimos la imagen de perfil en un router-link -->
-            <router-link to="/profile" class="routering">
+            <router-link to="/profileClients" class="routering">
                 <img src="../../assets/images/navbar-person.png" alt="profile" class="navbar-person">
             </router-link>
             <ul>
-                <router-link to="/clients" class="routering">
+                <router-link to="/profileClients" class="routering">
                     <li class="li-primary-options">
                         <img src="../../assets/images/navbar-start-icon.png" alt="start">
                         <span class="li-primary-options-text">{{ $t('navbar.inicio') }}</span>
                     </li>
                 </router-link>
-                <router-link to="/pets" class="routering">
+                <router-link to="/profileClients" class="routering">
                     <li class="li-primary-options">
                         <img src="../../assets/images/navbar-pet-icon.png" alt="pet">
                         <span class="li-primary-options-text">{{ $t('navbar.mascotas') }}</span>
                     </li>
                 </router-link>
-                <router-link to="/appointments" class="routering">
+                <router-link to="/profileClients" class="routering">
                     <li class="li-primary-options">
                         <img src="../../assets/images/navbar-calendar-icon.png" alt="calendar">
                         <span class="li-primary-options-text">{{ $t('navbar.citas') }}</span>
