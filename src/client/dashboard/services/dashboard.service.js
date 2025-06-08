@@ -1,4 +1,4 @@
-import { Appointment, VitalStatus, CollarStatus } from '../models/Dashboard.model'
+import { Appointment, VitalStatus, CollarStatus } from '../models/dashboard.model.js'
 
 export const getDashboardData = async () => {
     return {

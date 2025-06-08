@@ -50,15 +50,22 @@
     "searcher": "Buscar por nombre completo"
   },
   "dashboard": {
+    "totalClients": "Total de Clientes",
+    "totalStaff": "Total de Personal",
+    "totalRooms": "Total de Habitaciones",
+    "latestPatients": "Pacientes Recientes",
+    "weeklyReport": "Informe Semanal 💰",
+    "income": "Ingresos",
+    "outcome": "Egresos",
+    "clientNotifications": "Notificaciones de Clientes 🔔",
     "vitalStatus": "Estado Vital",
-    "appointmentsToday": "Citas para Hoy",
+    "appointmentsToday": "Citas de Hoy",
     "collarStatus": "Estado del Collar",
-    "realTimeLocation": "Real-Time localizacion",
+    "realTimeLocation": "Ubicación en Tiempo Real",
     "check-up": "Chequeo",
     "surgery": "Cirugía",
     "vaccination": "Vacunación"
   },
-
   "mascotas": {
     "agregar": "Agregar mascota",
     "nombre": "Nombre de la mascota",

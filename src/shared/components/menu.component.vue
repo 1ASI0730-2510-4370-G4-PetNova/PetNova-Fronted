@@ -7,12 +7,19 @@ import {$t} from "@primeuix/styled";
         <section class="menu-header">
             <img src="../../assets/images/navbar-person.png" alt="person" class="navbar-person">
             <ul>
-                <router-link to="/dashboard" class="routering">
+                <router-link to="/dashboard/vet" class="routering">
                     <li class="li-primary-options">
-                        <img src="../../assets/images/navbar-start-icon.png" alt="start">
-                        <span class="li-primary-options-text">{{ $t('navbar.inicio') }}</span>
+                      <img src="../../assets/images/navbar-start-icon.png" alt="dashboard">
+                      <span class="li-primary-options-text">{{ $t('navbar.inicio') }}</span>
                     </li>
                 </router-link>
+             <!--  <router-link to="/dashboard" class="routering">
+                <li class="li-primary-options">
+                  <img src="../../assets/images/navbar-start-icon.png" alt="dashboard">
+                  <span class="li-primary-options-text">{{ $t('navbar.inicio') }}</span>
+                </li>
+              </router-link>
+              -->
                 <router-link to="/clients" class="routering">
                     <li class="li-primary-options">
                         <img src="../../assets/images/navbar-client-icon.png" alt="client">
@@ -31,6 +38,7 @@ import {$t} from "@primeuix/styled";
                         <span class="li-primary-options-text">{{ $t('navbar.citas') }}</span>
                     </li>
                 </router-link>
+
                 <router-link to="/" class="routering">
                     <li class="li-primary-options">
                         <img src="../../assets/images/navbar-logout-icon.png" alt="logout">
