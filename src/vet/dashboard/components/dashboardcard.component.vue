@@ -1,9 +1,10 @@
 <template>
-  <div class="dashboard-card h-full">
-    <h2 class="text-xl font-semibold text-indigo-600 mb-4">{{ title }}</h2>
+  <div class="dashboard-card bg-white rounded-lg shadow-sm border p-3 h-full">
+    <h2 class="text-base font-medium text-indigo-600 mb-2 text-center">{{ title }}</h2>
     <slot></slot>
   </div>
 </template>
+
 
 <script setup>
 defineProps({ title: String })
@@ -16,6 +17,7 @@ defineProps({ title: String })
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 1rem;
+  width: 30%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
