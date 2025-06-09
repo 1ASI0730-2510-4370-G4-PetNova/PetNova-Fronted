@@ -24,10 +24,12 @@ export default class Pet {
   static isValid(pet) {
     return (
       pet.petName &&
+      pet.animalType && // Añadido
       pet.animalBreed &&
       pet.gender &&
       pet.birdDate &&
       pet.registrationDate &&
+      pet.owner && // Añadido
       pet.hc
     );
   }

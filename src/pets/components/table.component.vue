@@ -153,11 +153,26 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, watch } from "vue";
 import axios from "axios";
 
-const pets = ref([]);
-const search = ref("");
+const props = defineProps({
+  pets: {
+    type: Array,
+    required: true,
+  },
+  search: {
+    type: String,
+    default: "",
+  },
+  toast: {
+    type: Object,
+    default: null,
+  },
+});
+
+const emit = defineEmits(["refresh-pets"]);
+
 const currentPage = ref(1);
 const perPage = 5;
 const editVisible = ref(false);
@@ -165,10 +180,13 @@ const deleteVisible = ref(false);
 const editedPet = ref({});
 const petToDelete = ref(null);
 
-const fetchPets = async () => {
-  const res = await axios.get("https://fake-api-rose-psi.vercel.app/pets");
-  pets.value = res.data;
-};
+watch(
+  () => props.pets,
+  () => {
+    currentPage.value = 1;
+  },
+  { deep: true }
+);
 
 const isValidPet = (pet) => {
   return (
@@ -182,8 +200,8 @@ const isValidPet = (pet) => {
 };
 
 const filteredPets = computed(() => {
-  return pets.value.filter((pet) =>
-    pet.petName.toLowerCase().includes(search.value.toLowerCase())
+  return props.pets.filter((pet) =>
+    pet.petName.toLowerCase().includes(props.search.toLowerCase())
   );
 });
 
@@ -204,12 +222,18 @@ const openEditDialog = (pet) => {
 
 const savePet = async () => {
   if (!isValidPet(editedPet.value)) return;
-  await axios.put(
-    `https://fake-api-rose-psi.vercel.app/pets/${editedPet.value.id}`,
-    editedPet.value
-  );
-  editVisible.value = false;
-  fetchPets();
+
+  try {
+    await axios.put(
+      `https://fake-api-rose-psi.vercel.app/pets/${editedPet.value.id}`,
+      editedPet.value
+    );
+    editVisible.value = false;
+
+    emit("refresh-pets");
+  } catch (error) {
+    console.error("Error al guardar mascota:", error);
+  }
 };
 
 const openDeleteDialog = (pet) => {
@@ -218,9 +242,96 @@ const openDeleteDialog = (pet) => {
 };
 
 const confirmDelete = async () => {
-  await axios.delete(`http://localhost:3000/pets/${petToDelete.value.id}`);
-  deleteVisible.value = false;
-  fetchPets();
+  console.log("⭐ Inicio de confirmDelete para mascota:", petToDelete.value);
+
+  // Referencia para verificar después si la eliminación funcionó
+  const petIdToDelete = petToDelete.value.id;
+
+  try {
+    console.log(
+      `🔄 Enviando petición DELETE a API para mascota ${petIdToDelete}...`
+    );
+    await axios.delete(
+      `https://fake-api-rose-psi.vercel.app/pets/${petIdToDelete}`
+    );
+    console.log("✅ Mascota eliminada correctamente");
+    deleteVisible.value = false;
+
+    // Mostrar notificación de éxito
+    if (props.toast) {
+      props.toast.add({
+        severity: "success",
+        summary: "Éxito",
+        detail: "Mascota eliminada correctamente",
+        life: 3000,
+      });
+    }
+
+    // Notificar al componente padre para recargar la lista
+    emit("refresh-pets");
+  } catch (error) {
+    console.error("❌ Error al eliminar mascota:", error);
+
+    // Verificar si es el error 500 específico (como en createPet)
+    if (error.response && error.response.status === 500) {
+      console.log(
+        "⚠️ Error 500 detectado, verificando si la mascota fue eliminada..."
+      );
+
+      try {
+        // Esperar un momento para dar tiempo al backend
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
+        // Hacer una petición para verificar si la mascota sigue existiendo
+        console.log(
+          `🔄 Verificando si la mascota ${petIdToDelete} sigue existiendo...`
+        );
+        const response = await axios.get(
+          "https://fake-api-rose-psi.vercel.app/pets"
+        );
+        const allPets = response.data;
+
+        // Buscar si la mascota eliminada sigue en la lista
+        const petStillExists = allPets.some((pet) => pet.id === petIdToDelete);
+
+        if (!petStillExists) {
+          console.log(
+            "✅ La mascota parece haber sido eliminada a pesar del error 500"
+          );
+          deleteVisible.value = false;
+
+          // Mostrar notificación de éxito
+          if (props.toast) {
+            props.toast.add({
+              severity: "success",
+              summary: "Éxito",
+              detail: "Mascota eliminada correctamente",
+              life: 3000,
+            });
+          }
+
+          // Notificar al componente padre para recargar la lista
+          emit("refresh-pets");
+          return;
+        }
+      } catch (verifyError) {
+        console.error(
+          "❌ Error al verificar si la mascota fue eliminada:",
+          verifyError
+        );
+      }
+    }
+
+    // Mostrar mensaje de error
+    if (props.toast) {
+      props.toast.add({
+        severity: "error",
+        summary: "Error",
+        detail: "No se pudo eliminar la mascota. Intente nuevamente.",
+        life: 3000,
+      });
+    }
+  }
 };
 
 const prevPage = () => {
@@ -230,8 +341,6 @@ const prevPage = () => {
 const nextPage = () => {
   if (currentPage.value < totalPages.value) currentPage.value++;
 };
-
-onMounted(fetchPets);
 </script>
 
 <style scoped>
