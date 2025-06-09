@@ -67,7 +67,9 @@
     "no-disponible": "Data no disponible.",
     "cancelar": "Cancelar",
     "guardar": "Guardar",
-    "searcher": "Buscar por nombre de la mascota"
+    "searcher": "Buscar por nombre de la mascota",
+    "tipo-mascota": "Tipo de mascota",
+    "propietario": "Propietario"
   },
   "citas": {
     "agregar": "Agregar cita",
