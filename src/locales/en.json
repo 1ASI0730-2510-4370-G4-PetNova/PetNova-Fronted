@@ -69,7 +69,10 @@
     "guardar": "Save",
     "searcher": "Search by pet name",
     "tipo-mascota": "Type animal",
-    "propietario": "Owner"
+    "propietario": "Owner",
+    "otro": "Other",
+    "guardar-foto": "Save photo",
+    "crear": "Create"
   },
   "citas": {
     "agregar": "Add appointment",

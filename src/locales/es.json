@@ -69,7 +69,10 @@
     "guardar": "Guardar",
     "searcher": "Buscar por nombre de la mascota",
     "tipo-mascota": "Tipo de mascota",
-    "propietario": "Propietario"
+    "propietario": "Propietario",
+    "otro": "Otro",
+    "guardar-foto": "Guardar foto",
+    "crear": "Crear"
   },
   "citas": {
     "agregar": "Agregar cita",
