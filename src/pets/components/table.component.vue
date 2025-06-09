@@ -201,29 +201,28 @@
     </div>
   </PvDialog>
 
+  <!-- Reemplaza el diálogo de eliminación existente con este nuevo diálogo estilizado -->
   <PvDialog
     v-model:visible="deleteVisible"
     modal
     :header="$t('mascotas.eliminar-mascota')"
     :style="{ width: '25rem' }"
+    class="custom-delete-dialog"
   >
-    <span class="text-surface-500 dark:text-surface-400 block">{{
-      $t("mascotas.estas-seguro")
-    }}</span>
-    <template #footer>
-      <PvButton
-        :label="$t('mascotas.cancelar')"
-        text
-        severity="secondary"
-        @click="deleteVisible = false"
-      />
-      <PvButton
-        :label="$t('mascotas.eliminar')"
-        outlined
-        severity="danger"
-        @click="confirmDelete"
-      />
-    </template>
+    <div class="delete-confirmation-container">
+      <p class="delete-confirmation-text">
+        {{ $t("mascotas.estas-seguro") }}
+      </p>
+
+      <div class="delete-confirmation-buttons">
+        <button class="confirmation-btn yes-btn" @click="confirmDelete">
+          YES
+        </button>
+        <button class="confirmation-btn no-btn" @click="deleteVisible = false">
+          NO
+        </button>
+      </div>
+    </div>
   </PvDialog>
 </template>
 
@@ -813,5 +812,72 @@ tr {
   color: #333;
   cursor: not-allowed;
   border: 1px solid #ddd;
+}
+
+/* Estilos para el diálogo de confirmación de eliminación personalizado */
+.custom-delete-dialog :deep(.p-dialog-header) {
+  /* Si quieres un estilo específico para la cabecera */
+  border-bottom: none;
+  background-color: #f8f9fa;
+}
+
+.custom-delete-dialog :deep(.p-dialog-content) {
+  padding: 1.5rem;
+  background-color: #f8f9fa;
+}
+
+.delete-confirmation-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.delete-confirmation-text {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-weight: 500;
+  color: #333;
+}
+
+.delete-confirmation-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+}
+
+.confirmation-btn {
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.yes-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.yes-btn:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.no-btn {
+  background-color: #64b5f6;
+  color: white;
+}
+
+.no-btn:hover {
+  background-color: #5a9edb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 </style>
