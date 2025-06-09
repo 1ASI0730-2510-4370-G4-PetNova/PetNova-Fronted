@@ -72,7 +72,9 @@
     "propietario": "Propietario",
     "otro": "Otro",
     "guardar-foto": "Guardar foto",
-    "crear": "Crear"
+    "crear": "Crear",
+    "edicion": "Edición",
+    "actualizar": "Actualizar"
   },
   "citas": {
     "agregar": "Agregar cita",

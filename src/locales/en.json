@@ -72,7 +72,9 @@
     "propietario": "Owner",
     "otro": "Other",
     "guardar-foto": "Save photo",
-    "crear": "Create"
+    "crear": "Create",
+    "edicion": "Edit",
+    "actualizar": "Update"
   },
   "citas": {
     "agregar": "Add appointment",

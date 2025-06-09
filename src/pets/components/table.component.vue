@@ -81,49 +81,124 @@
     v-model:visible="editVisible"
     modal
     :header="$t('mascotas.editar-mascota')"
-    :style="{ width: '25rem' }"
+    :style="{ width: '60rem', maxWidth: '90vw' }"
+    class="pet-registration-dialog"
   >
-    <section>
-      <section class="flex flex-column mb-1">
-        <label>{{ $t("mascotas.nombre") }}</label>
-        <PvInputText v-model="editedPet.petName" class="flex-auto" />
-      </section>
-      <section class="flex flex-column mb-1">
-        <label>{{ $t("mascotas.cumpleanos") }}</label>
-        <PvInputText v-model="editedPet.birdDate" class="flex-auto" />
-      </section>
-      <section class="flex flex-column mb-1">
-        <label>{{ $t("mascotas.registro") }}</label>
-        <PvInputText v-model="editedPet.registrationDate" class="flex-auto" />
-      </section>
-      <section class="flex flex-column mb-1">
-        <label>{{ $t("mascotas.raza") }}</label>
-        <PvInputText v-model="editedPet.animalBreed" class="flex-auto" />
-      </section>
-      <section class="flex flex-column mb-1">
-        <label>{{ $t("mascotas.genero") }}</label>
-        <PvInputText v-model="editedPet.gender" class="flex-auto" />
-      </section>
-      <section class="flex flex-column">
-        <label>{{ $t("mascotas.hc") }}</label>
-        <PvInputText v-model="editedPet.hc" class="flex-auto" />
-      </section>
-    </section>
-    <template #footer>
-      <PvButton
-        :label="$t('mascotas.cancelar')"
-        text
-        severity="secondary"
-        @click="editVisible = false"
-      />
-      <PvButton
-        :label="$t('mascotas.guardar')"
-        outlined
-        severity="danger"
-        @click="savePet"
-        :disabled="!isValidPet(editedPet)"
-      />
-    </template>
+    <div class="pet-registration-container">
+      <div class="pet-form-container">
+        <h2>{{ $t("mascotas.edicion") }}</h2>
+
+        <!-- Campo HC de solo lectura -->
+        <div class="form-group">
+          <label>{{ $t("mascotas.hc") }}:</label>
+          <input
+            v-model="editedPet.hc"
+            class="form-control disabled-input"
+            disabled
+          />
+        </div>
+
+        <div class="form-group">
+          <label>{{ $t("mascotas.nombre") }}:</label>
+          <input v-model="editedPet.petName" class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label>{{ $t("mascotas.tipo-mascota") }}:</label>
+          <input v-model="editedPet.animalType" class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label>{{ $t("mascotas.raza") }}:</label>
+          <input v-model="editedPet.animalBreed" class="form-control" />
+        </div>
+
+        <div class="form-group gender-group">
+          <label>{{ $t("mascotas.genero") }}:</label>
+          <div class="gender-options">
+            <button
+              :class="['gender-btn', editedPet.gender === 'M' ? 'active' : '']"
+              @click="editedPet.gender = 'M'"
+            >
+              M
+            </button>
+            <button
+              :class="['gender-btn', editedPet.gender === 'F' ? 'active' : '']"
+              @click="editedPet.gender = 'F'"
+            >
+              F
+            </button>
+            <button
+              :class="[
+                'gender-btn',
+                editedPet.gender === 'Other' ? 'active' : '',
+              ]"
+              @click="editedPet.gender = 'Other'"
+            >
+              {{ $t("mascotas.otro") }}
+            </button>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label>{{ $t("mascotas.registro") }}:</label>
+            <input
+              type="date"
+              v-model="editedPet.registrationDate"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group half">
+            <label>{{ $t("mascotas.cumpleanos") }}:</label>
+            <input
+              type="date"
+              v-model="editedPet.birdDate"
+              class="form-control"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>{{ $t("mascotas.propietario") }}:</label>
+          <input v-model="editedPet.owner" class="form-control" />
+        </div>
+
+        <div class="form-actions">
+          <button class="cancel-btn" @click="editVisible = false">
+            {{ $t("mascotas.cancelar") }}
+          </button>
+          <button
+            class="update-btn"
+            @click="savePet"
+            :disabled="!isValidPet(editedPet)"
+          >
+            {{ $t("mascotas.actualizar") }}
+          </button>
+        </div>
+      </div>
+
+      <div class="pet-photo-container">
+        <div class="photo-upload-area">
+          <img
+            v-if="editedPetPhoto"
+            :src="editedPetPhoto"
+            alt="Vista previa de la foto de mascota"
+            class="photo-preview"
+          />
+          <img
+            v-else-if="editedPet.photo"
+            :src="editedPet.photo"
+            alt="Foto de mascota"
+            class="photo-preview"
+          />
+          <div v-else class="photo-placeholder"></div>
+        </div>
+        <button class="save-photo-btn" @click="uploadEditPhoto">
+          {{ $t("mascotas.guardar-foto") }}
+        </button>
+      </div>
+    </div>
   </PvDialog>
 
   <PvDialog
@@ -178,6 +253,7 @@ const perPage = 5;
 const editVisible = ref(false);
 const deleteVisible = ref(false);
 const editedPet = ref({});
+const editedPetPhoto = ref(null);
 const petToDelete = ref(null);
 
 watch(
@@ -217,23 +293,146 @@ const paginatedPets = computed(() =>
 
 const openEditDialog = (pet) => {
   editedPet.value = { ...pet };
+  editedPetPhoto.value = null;
   editVisible.value = true;
 };
 
 const savePet = async () => {
-  if (!isValidPet(editedPet.value)) return;
+  if (!isValidPet(editedPet.value)) {
+    if (props.toast) {
+      props.toast.add({
+        severity: "warn",
+        summary: "Formulario incompleto",
+        detail: "Por favor complete todos los campos requeridos",
+        life: 3000,
+      });
+    }
+    return;
+  }
 
   try {
+    // Mostrar notificación de carga
+    let loading;
+    if (props.toast) {
+      loading = props.toast.add({
+        severity: "info",
+        summary: "Procesando",
+        detail: "Actualizando mascota...",
+        life: 3000,
+      });
+    }
+
+    // Si hay una nueva foto, actualizar
+    if (editedPetPhoto.value) {
+      editedPet.value.photo = editedPetPhoto.value;
+    }
+
+    // Realizar la petición PUT
     await axios.put(
       `https://fake-api-rose-psi.vercel.app/pets/${editedPet.value.id}`,
       editedPet.value
     );
+
+    // Cerrar el diálogo
     editVisible.value = false;
 
+    // Eliminar notificación de carga
+    if (props.toast && loading) {
+      props.toast.remove(loading);
+    }
+
+    // Mostrar notificación de éxito
+    if (props.toast) {
+      props.toast.add({
+        severity: "success",
+        summary: "Éxito",
+        detail: "¡Mascota actualizada correctamente!",
+        life: 3000,
+      });
+    }
+
+    // Actualizar la lista de mascotas
     emit("refresh-pets");
   } catch (error) {
-    console.error("Error al guardar mascota:", error);
+    console.error("Error al actualizar mascota:", error);
+
+    // Verificar si es el error 500 específico
+    if (error.response && error.response.status === 500) {
+      console.log(
+        "⚠️ Error 500 detectado, verificando si la mascota fue actualizada..."
+      );
+
+      try {
+        // Esperar un momento
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
+        // Verificar si la actualización fue exitosa
+        const response = await axios.get(
+          "https://fake-api-rose-psi.vercel.app/pets"
+        );
+        const updatedPets = response.data;
+
+        // Buscar la mascota actualizada
+        const updatedPet = updatedPets.find((p) => p.id === editedPet.value.id);
+
+        if (updatedPet) {
+          // Comparar los datos para ver si se actualizó
+          if (
+            updatedPet.petName === editedPet.value.petName &&
+            updatedPet.animalBreed === editedPet.value.animalBreed
+          ) {
+            console.log(
+              "✅ La mascota parece haber sido actualizada a pesar del error"
+            );
+
+            editVisible.value = false;
+
+            if (props.toast) {
+              props.toast.add({
+                severity: "success",
+                summary: "Éxito",
+                detail: "¡Mascota actualizada correctamente!",
+                life: 3000,
+              });
+            }
+
+            emit("refresh-pets");
+            return;
+          }
+        }
+      } catch (verifyError) {
+        console.error("Error al verificar actualización:", verifyError);
+      }
+    }
+
+    // Mostrar mensaje de error
+    if (props.toast) {
+      props.toast.add({
+        severity: "error",
+        summary: "Error",
+        detail: "No se pudo actualizar la mascota",
+        life: 3000,
+      });
+    }
   }
+};
+
+const uploadEditPhoto = () => {
+  // Función para cargar foto en modo edición
+  const fileInput = document.createElement("input");
+  fileInput.type = "file";
+  fileInput.accept = "image/*";
+  fileInput.onchange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        editedPetPhoto.value = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+  fileInput.click();
 };
 
 const openDeleteDialog = (pet) => {
@@ -463,5 +662,156 @@ tr {
   outline: none;
   box-shadow: none;
   border-color: inherit;
+}
+
+/* Agregar estilo para el botón de actualizar */
+.update-btn {
+  padding: 8px 16px;
+  background-color: #3b82f6; /* Un azul diferente para distinguirlo */
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.update-btn:hover {
+  background-color: #2563eb;
+}
+
+.update-btn:disabled {
+  background-color: #b3b3b3;
+  cursor: not-allowed;
+}
+
+/* Otros estilos para mantener la coherencia con el diálogo de crear */
+.pet-registration-dialog :deep(.p-dialog-header) {
+  border-bottom: none;
+}
+
+.pet-registration-container {
+  display: flex;
+  gap: 20px;
+}
+
+.pet-form-container {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.pet-photo-container {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.photo-upload-area {
+  width: 100%;
+  height: 250px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.photo-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: #e9e9e9;
+}
+
+.photo-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.save-photo-btn {
+  background-color: #1e3c72;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f0f7ff;
+}
+
+.form-row {
+  display: flex;
+  gap: 15px;
+}
+
+.half {
+  flex: 1;
+}
+
+.gender-group {
+  margin-bottom: 20px;
+}
+
+.gender-options {
+  display: flex;
+  gap: 10px;
+}
+
+.gender-btn {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ddd;
+  background-color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.gender-btn.active {
+  background-color: #1e3c72;
+  color: white;
+  border-color: #1e3c72;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.cancel-btn {
+  padding: 8px 16px;
+  background-color: #6abfe3;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Estilo para el input desactivado */
+.disabled-input {
+  background-color: #f0f0f0;
+  color: #333;
+  cursor: not-allowed;
+  border: 1px solid #ddd;
 }
 </style>
