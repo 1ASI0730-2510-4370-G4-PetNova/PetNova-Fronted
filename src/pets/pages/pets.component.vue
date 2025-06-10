@@ -176,19 +176,6 @@ const refreshKey = ref(0);
 
 // Para usar los mensajes toast
 const toast = inject("toast");
-console.log(
-  "💉 Toast service inyectado:",
-  toast ? "Disponible" : "No disponible"
-);
-
-// Verificar que los métodos existen
-if (toast) {
-  console.log("💉 Métodos disponibles en toast:", {
-    add: typeof toast.add === "function",
-    remove: typeof toast.remove === "function",
-    removeAllGroups: typeof toast.removeAllGroups === "function",
-  });
-}
 
 const isValidPet = (pet) => Pet.isValid(pet);
 
@@ -199,53 +186,33 @@ onMounted(async () => {
 
 // Función para cargar las mascotas desde la API
 const loadPets = async () => {
-  console.log("⭐ Inicio de loadPets");
   try {
-    console.log("🔄 Llamando a fetchPets...");
     const data = await fetchPets();
-    console.log("✅ Datos obtenidos de fetchPets:", data);
-    console.log("📊 Cantidad de mascotas recibidas:", data ? data.length : 0);
-
     allPets.value = data;
-    console.log("✅ allPets actualizado:", allPets.value.length);
-
     filteredPets.value = data;
-    console.log("✅ filteredPets actualizado:", filteredPets.value.length);
 
     // Forzar la actualización de la tabla
     refreshKey.value++;
 
-    return data; // Asegúrate de retornar los datos
+    return data;
   } catch (error) {
-    console.error("❌ ERROR en loadPets:", error);
     toast.add({
       severity: "error",
       summary: "Error",
       detail:
         "No se pudieron cargar las mascotas: " +
-        (error.message || JSON.stringify(error)),
+        (error.message || "Error desconocido"),
       life: 3000,
     });
-    return []; // Retornar array vacío en caso de error
   }
 };
 
-// Calcular el siguiente número de HC basado en las mascotas existentes
+// Generar el siguiente número HC basado en los existentes
 const getNextHcNumber = () => {
-  // Si no hay mascotas, comenzamos con 1
-  if (!allPets.value || allPets.value.length === 0) {
-    return "1";
-  }
-
-  // Encontrar el número más alto de HC
+  // Encontrar el número HC más alto y sumar 1
   const highestHc = allPets.value.reduce((max, pet) => {
-    // Convertir HC a número, si es posible
-    const hcNum = parseInt(pet.hc);
-    // Si es un número válido y es mayor que nuestro máximo actual
-    if (!isNaN(hcNum) && hcNum > max) {
-      return hcNum;
-    }
-    return max;
+    const hcNum = parseInt(pet.hc, 10) || 0;
+    return hcNum > max ? hcNum : max;
   }, 0);
 
   // Retornar el siguiente número como string
@@ -264,10 +231,7 @@ const openAddDialog = async () => {
 };
 
 const createPet = async () => {
-  console.log("⭐ Inicio de createPet");
-
   if (!isValidPet(newPet.value)) {
-    console.log("❌ Validación fallida:", newPet.value);
     toast.add({
       severity: "warn",
       summary: "Formulario incompleto",
@@ -277,22 +241,15 @@ const createPet = async () => {
     return;
   }
 
-  console.log(
-    "✅ Validación exitosa, todos los campos requeridos están completos"
-  );
-
   // Crear una copia del objeto para no modificar el original
   const petToSave = { ...newPet.value };
-  console.log("📦 Objeto mascota a guardar:", petToSave);
 
   // Si tienes una foto, incluirla en el objeto mascota
   if (photoPreview.value) {
     petToSave.photo = photoPreview.value;
-    console.log("🖼️ Foto adjuntada (longitud):", petToSave.photo.length);
   }
 
   // Mostrar spinner o indicador de carga
-  console.log("🔄 Mostrando notificación de carga...");
   const loadingMsg = {
     severity: "info",
     summary: "Procesando",
@@ -303,25 +260,17 @@ const createPet = async () => {
   let loading;
   try {
     loading = toast.add(loadingMsg);
-    console.log("🔄 Notificación de carga mostrada:", loading);
   } catch (toastError) {
-    console.error("❌ Error al mostrar notificación de carga:", toastError);
+    // Error silencioso
   }
 
   try {
-    console.log("🚀 Enviando petición al servicio createPetService...");
     await createPetService(petToSave);
     // Continuamos como si fuera exitoso
     handleSuccessfulCreation(loading);
   } catch (error) {
-    console.error("❌ ERROR CRÍTICO en createPet:", error);
-
     // Verificar si es el error 500 específico que sabemos que aún así crea la mascota
     if (error.message && error.message.includes("500")) {
-      console.log(
-        "⚠️ Error 500 detectado, pero posiblemente la mascota fue creada. Verificando..."
-      );
-
       // Intentamos cargar las mascotas para verificar si se creó
       try {
         // Esperar un momento para dar tiempo a que el backend procese la operación
@@ -338,18 +287,11 @@ const createPet = async () => {
         );
 
         if (foundPet) {
-          console.log(
-            "✅ La mascota parece haber sido creada a pesar del error 500:",
-            foundPet
-          );
           handleSuccessfulCreation(loading);
           return;
         }
       } catch (verifyError) {
-        console.error(
-          "❌ Error al verificar si la mascota fue creada:",
-          verifyError
-        );
+        // Error silencioso
       }
     }
 
@@ -363,46 +305,35 @@ const handleSuccessfulCreation = async (loading) => {
   // Quitar el mensaje de carga
   if (loading) {
     try {
-      console.log("🔄 Intentando eliminar notificación de carga...");
       toast.remove(loading);
-      console.log("✅ Notificación de carga eliminada");
     } catch (removeError) {
-      console.error("❌ Error al eliminar notificación de carga:", removeError);
+      // Error silencioso
     }
   }
 
   // Mostrar mensaje de éxito
   try {
-    console.log("🔄 Mostrando notificación de éxito...");
     toast.add({
       severity: "success",
       summary: "Éxito",
       detail: "¡Mascota creada correctamente!",
       life: 5000,
     });
-    console.log("✅ Notificación de éxito mostrada");
   } catch (successToastError) {
-    console.error(
-      "❌ Error al mostrar notificación de éxito:",
-      successToastError
-    );
+    // Error silencioso
   }
 
   // Actualizar las mascotas en la vista
-  console.log("🔄 Recargando lista de mascotas...");
   try {
     await loadPets();
-    console.log("✅ Lista de mascotas recargada");
   } catch (loadError) {
-    console.error("❌ Error al recargar mascotas:", loadError);
+    // Error silencioso
   }
 
   // Cerrar el diálogo y limpiar el formulario
-  console.log("🔄 Cerrando diálogo y limpiando formulario...");
   createVisible.value = false;
   newPet.value = new Pet();
   photoPreview.value = null;
-  console.log("✅ Proceso de creación completado con éxito");
 };
 
 // Función auxiliar para manejar la creación fallida
@@ -410,20 +341,14 @@ const handleFailedCreation = (error, loading) => {
   // Quitar el mensaje de carga en caso de error
   if (loading) {
     try {
-      console.log("🔄 Intentando eliminar notificación de carga (error)...");
       toast.remove(loading);
-      console.log("✅ Notificación de carga eliminada (error)");
     } catch (removeError) {
-      console.error(
-        "❌ Error al eliminar notificación de carga (error):",
-        removeError
-      );
+      // Error silencioso
     }
   }
 
   // Mostrar mensaje de error
   try {
-    console.log("🔄 Mostrando notificación de error...");
     toast.add({
       severity: "error",
       summary: "Error",
@@ -432,12 +357,8 @@ const handleFailedCreation = (error, loading) => {
         (error.message || JSON.stringify(error) || "Error desconocido"),
       life: 5000,
     });
-    console.log("✅ Notificación de error mostrada");
   } catch (errorToastError) {
-    console.error(
-      "❌ Error al mostrar notificación de error:",
-      errorToastError
-    );
+    // Error silencioso
   }
 };
 

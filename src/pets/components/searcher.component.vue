@@ -52,7 +52,6 @@ const searchPet = async () => {
     // Emitir el evento con los resultados filtrados
     emit("pet-found", filteredPets);
   } catch (error) {
-    console.error("Search error:", error);
     // En caso de error, emitir un array vacío
     emit("pet-found", []);
   }

@@ -362,14 +362,8 @@ const savePet = async () => {
     // Actualizar la lista de mascotas
     emit("refresh-pets");
   } catch (error) {
-    console.error("Error al actualizar mascota:", error);
-
     // Verificar si es el error 500 específico
     if (error.response && error.response.status === 500) {
-      console.log(
-        "⚠️ Error 500 detectado, verificando si la mascota fue actualizada..."
-      );
-
       try {
         // Esperar un momento
         await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -389,10 +383,6 @@ const savePet = async () => {
             updatedPet.petName === editedPet.value.petName &&
             updatedPet.animalBreed === editedPet.value.animalBreed
           ) {
-            console.log(
-              "✅ La mascota parece haber sido actualizada a pesar del error"
-            );
-
             editVisible.value = false;
 
             if (props.toast) {
@@ -409,7 +399,7 @@ const savePet = async () => {
           }
         }
       } catch (verifyError) {
-        console.error("Error al verificar actualización:", verifyError);
+        // Error silencioso
       }
     }
 
@@ -449,8 +439,6 @@ const openDeleteDialog = (pet) => {
 };
 
 const confirmDelete = async () => {
-  console.log("⭐ Inicio de confirmDelete para mascota:", petToDelete.value);
-
   // Referencia para verificar después si la eliminación funcionó
   const petIdToDelete = petToDelete.value.id;
 
@@ -466,13 +454,9 @@ const confirmDelete = async () => {
   }
 
   try {
-    console.log(
-      `🔄 Enviando petición DELETE a API para mascota ${petIdToDelete}...`
-    );
     await axios.delete(
       `https://fake-api-rose-psi.vercel.app/pets/${petIdToDelete}`
     );
-    console.log("✅ Mascota eliminada correctamente");
 
     // Quitar notificación de carga
     if (props.toast && loadingNotification) {
@@ -494,27 +478,18 @@ const confirmDelete = async () => {
     // Notificar al componente padre para recargar la lista
     emit("refresh-pets");
   } catch (error) {
-    console.error("❌ Error al eliminar mascota:", error);
-
     // Quitar notificación de carga
     if (props.toast && loadingNotification) {
       props.toast.remove(loadingNotification);
     }
 
-    // Verificar si es el error 500 específico (como en createPet)
+    // Verificar si es el error 500 específico
     if (error.response && error.response.status === 500) {
-      console.log(
-        "⚠️ Error 500 detectado, verificando si la mascota fue eliminada..."
-      );
-
       try {
         // Esperar un momento para dar tiempo al backend
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         // Hacer una petición para verificar si la mascota sigue existiendo
-        console.log(
-          `🔄 Verificando si la mascota ${petIdToDelete} sigue existiendo...`
-        );
         const response = await axios.get(
           "https://fake-api-rose-psi.vercel.app/pets"
         );
@@ -524,9 +499,6 @@ const confirmDelete = async () => {
         const petStillExists = allPets.some((pet) => pet.id === petIdToDelete);
 
         if (!petStillExists) {
-          console.log(
-            "✅ La mascota parece haber sido eliminada a pesar del error 500"
-          );
           deleteVisible.value = false;
 
           // Mostrar notificación de éxito
@@ -544,10 +516,7 @@ const confirmDelete = async () => {
           return;
         }
       } catch (verifyError) {
-        console.error(
-          "❌ Error al verificar si la mascota fue eliminada:",
-          verifyError
-        );
+        // Error silencioso
       }
     }
 
