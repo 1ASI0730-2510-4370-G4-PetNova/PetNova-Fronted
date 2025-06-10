@@ -445,6 +445,17 @@ const confirmDelete = async () => {
   // Referencia para verificar después si la eliminación funcionó
   const petIdToDelete = petToDelete.value.id;
 
+  // Mostrar notificación de "Eliminando..."
+  let loadingNotification;
+  if (props.toast) {
+    loadingNotification = props.toast.add({
+      severity: "info",
+      summary: "Procesando",
+      detail: "Eliminando mascota...",
+      life: 3000,
+    });
+  }
+
   try {
     console.log(
       `🔄 Enviando petición DELETE a API para mascota ${petIdToDelete}...`
@@ -453,7 +464,11 @@ const confirmDelete = async () => {
       `https://fake-api-rose-psi.vercel.app/pets/${petIdToDelete}`
     );
     console.log("✅ Mascota eliminada correctamente");
-    deleteVisible.value = false;
+
+    // Quitar notificación de carga
+    if (props.toast && loadingNotification) {
+      props.toast.remove(loadingNotification);
+    }
 
     // Mostrar notificación de éxito
     if (props.toast) {
@@ -465,10 +480,17 @@ const confirmDelete = async () => {
       });
     }
 
+    deleteVisible.value = false;
+
     // Notificar al componente padre para recargar la lista
     emit("refresh-pets");
   } catch (error) {
     console.error("❌ Error al eliminar mascota:", error);
+
+    // Quitar notificación de carga
+    if (props.toast && loadingNotification) {
+      props.toast.remove(loadingNotification);
+    }
 
     // Verificar si es el error 500 específico (como en createPet)
     if (error.response && error.response.status === 500) {
