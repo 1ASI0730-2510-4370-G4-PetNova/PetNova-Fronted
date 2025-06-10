@@ -462,6 +462,7 @@ const uploadPhoto = () => {
 
 const handleSearchResults = (results) => {
   filteredPets.value = results;
+  refreshKey.value++;
 };
 </script>
 

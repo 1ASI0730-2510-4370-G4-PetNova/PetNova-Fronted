@@ -13,7 +13,16 @@
     </thead>
     <tbody>
       <tr v-if="paginatedPets.length === 0">
-        <td colspan="8" class="no-data">{{ $t("mascotas.no-disponible") }}</td>
+        <td colspan="7" class="no-data">
+          <div class="not-found-container">
+            <img
+              src="../../assets/images/not-found.png"
+              alt="Not found"
+              class="not-found-image"
+            />
+            <div class="not-found-text">{{ $t("mascotas.no-encontrado") }}</div>
+          </div>
+        </td>
       </tr>
       <tr v-for="pet in paginatedPets" :key="pet.id">
         <td>
@@ -901,5 +910,32 @@ tr {
   background-color: #5a9edb;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Añadir solo los nuevos estilos para la imagen "Not found" */
+.no-data {
+  height: 300px; /* Alto fijo para mostrar la imagen */
+  text-align: center;
+}
+
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 20px;
+}
+
+.not-found-image {
+  width: 150px;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+.not-found-text {
+  font-size: 18px;
+  color: #666;
+  font-weight: 500;
 }
 </style>

@@ -74,7 +74,8 @@
     "guardar-foto": "Guardar foto",
     "crear": "Crear",
     "edicion": "Edición",
-    "actualizar": "Actualizar"
+    "actualizar": "Actualizar",
+    "no-encontrado": "No se encontraron mascotas"
   },
   "citas": {
     "agregar": "Agregar cita",

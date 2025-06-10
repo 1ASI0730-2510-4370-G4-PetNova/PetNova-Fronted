@@ -4,34 +4,57 @@
       src="../../assets/images/search-icon.png"
       alt="search"
       class="search-icon"
-      @click="searchUser"
+      @click="searchPet"
     />
     <input
       v-model="search"
       type="text"
       :placeholder="$t('mascotas.searcher')"
       required
+      @keyup.enter="searchPet"
+      @input="handleInput"
     />
   </div>
 </template>
 
 <script setup>
-import { ref, defineEmits } from 'vue';
-import axios from 'axios';
+import { ref, defineEmits } from "vue";
+import { fetchPets } from "../services/pet.service";
 
-const search = ref('');
-const emit = defineEmits(['user-found']);
+const search = ref("");
+const emit = defineEmits(["pet-found"]);
 
-const searchUser = async () => {
-  if (!search.value.trim()) return;
+// Función que se ejecuta cuando el usuario escribe en el campo de búsqueda
+const handleInput = () => {
+  if (search.value === "") {
+    // Si el campo está vacío, emitimos un evento para cargar todas las mascotas
+    searchPet();
+  }
+};
+
+// Función para buscar mascotas por nombre
+const searchPet = async () => {
   try {
-    const { data } = await axios.get(
-      `https://fake-api-rose-psi.vercel.app/clients/fullName=${search.value.trim()}`
+    // Obtener todas las mascotas
+    const allPets = await fetchPets();
+
+    // Si el campo de búsqueda está vacío, devolver todas las mascotas
+    if (!search.value.trim()) {
+      emit("pet-found", allPets);
+      return;
+    }
+
+    // Filtrar las mascotas cuyo nombre contenga el término de búsqueda (case-insensitive)
+    const filteredPets = allPets.filter((pet) =>
+      pet.petName.toLowerCase().includes(search.value.toLowerCase())
     );
-    emit('user-found', data);
-    console.log('Search results:', data);
+
+    // Emitir el evento con los resultados filtrados
+    emit("pet-found", filteredPets);
   } catch (error) {
-    console.error('Search error:', error);
+    console.error("Search error:", error);
+    // En caso de error, emitir un array vacío
+    emit("pet-found", []);
   }
 };
 </script>

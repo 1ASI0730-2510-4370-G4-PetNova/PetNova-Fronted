@@ -74,7 +74,8 @@
     "guardar-foto": "Save photo",
     "crear": "Create",
     "edicion": "Edit",
-    "actualizar": "Update"
+    "actualizar": "Update",
+    "no-encontrado": "No pets found"
   },
   "citas": {
     "agregar": "Add appointment",
