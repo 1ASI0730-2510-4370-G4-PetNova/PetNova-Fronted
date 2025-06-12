@@ -134,5 +134,96 @@
       "description": "This is the second notification.",
       "date": "2023-10-02"
     }
+  ],
+  "medicalHistories": [
+    {
+      "id": "1",
+      "petId": "af3b",
+      "title": "Ear-infection",
+      "description": "Ear-infection-desc",
+      "date": "2025-12-23",
+      "type": "clinical"
+    },
+    {
+      "id": "2",
+      "petId": "af3b",
+      "title": "vomiting-episode",
+      "description": "vomiting-episode-desc",
+      "date": "2025-12-01",
+      "type": "clinical"
+    },
+    {
+      "id": "3",
+      "petId": "af3b",
+      "title": "limping-leg",
+      "description": "limping-leg-desc",
+      "date": "2025-11-20",
+      "type": "clinical"
+    },
+    {
+      "id": "4",
+      "petId": "0367",
+      "title": "rabies-vaccine",
+      "description": "rabies-vaccine-desc",
+      "date": "2025-10-15",
+      "type": "clinical"
+    },
+    {
+      "id": "5",
+      "petId": "0367",
+      "title": "allergy-reaction",
+      "description": "allergy-reaction-desc",
+      "date": "2025-11-05",
+      "type": "clinical"
+    },
+    {
+      "id": "6",
+      "petId": "af3b",
+      "title": "Annual Vaccination",
+      "description": "Rabies and DHPP vaccines administered. Next due in 1 year.",
+      "date": "2025-12-23",
+      "type": "preventive"
+    },
+    {
+      "id": "7",
+      "petId": "af3b",
+      "title": "Deworming Control",
+      "description": "Oral dewormer given. Repeat every 3 months.",
+      "date": "2025-12-01",
+      "type": "preventive"
+    },
+    {
+      "id": "8",
+      "petId": "af3b",
+      "title": "Dental Check-up",
+      "description": "Teeth cleaned professionally. No tartar buildup found.",
+      "date": "2025-11-20",
+      "type": "preventive"
+    },
+    {
+      "id": "9",
+      "petId": "0367",
+      "title": "Flea and Tick Prevention",
+      "description": "Topical treatment applied. Next dose in 30 days.",
+      "date": "2025-11-05",
+      "type": "preventive"
+    },
+    {
+      "id": "10",
+      "petId": "0367",
+      "title": "Heartworm Test",
+      "description": "Heartworm antigen test: Negative.",
+      "date": "2025-10-20",
+      "type": "preventive"
+    },
+    {
+      "id": "11",
+      "petId": "0367",
+      "title": "Nutritional Counseling",
+      "description": "Diet evaluated. High-protein diet recommended.",
+      "date": "2025-12-01",
+      "type": "preventive"
+    }
   ]
+
 }

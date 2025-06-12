@@ -89,5 +89,17 @@
     "guardar": "Save",
     "searcher": "Search by pet name"
   },
+  "medicalHistory": {
+    "ear-infection": "Ear Infection",
+    "ear-infection-desc": "Treated with antibiotic drops. Follow-up in 5 days.",
+    "vomiting-episode": "Vomiting Episode",
+    "vomiting-episode-desc": "Started bland diet. Monitor hydration and appetite.",
+    "limping-leg": "Limping on Left Leg",
+    "limping-leg-desc": "X-rays scheduled. Rest and limited movement advised.",
+    "rabies-vaccine": "Vaccination - Rabies",
+    "rabies-vaccine-desc": "Administered rabies vaccine. Next dose in 1 year.",
+    "allergy-reaction": "Allergy Reaction",
+    "allergy-reaction-desc": "Skin irritation. Prescribed antihistamines."
+  },
   "contactenos": "Contact us"
 }

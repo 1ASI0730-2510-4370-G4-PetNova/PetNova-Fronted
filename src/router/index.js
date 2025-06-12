@@ -16,6 +16,30 @@ const routes = [
     { path: '/clients', component: clients },
     { path: '/pets', component: pets },
     { path: '/appointments', component: appointments },
+    {
+        path: '/pets/:id/history',
+        name: 'PetHistory',
+        component: () => import('@/vet/pets/pages/pet-history.component.vue'),
+        props: true,
+        children: [
+            {
+                path: '',
+                redirect: 'clinical' // redirige por defecto
+            },
+            {
+                path: 'clinical',
+                name: 'ClinicalManagement',
+                component: () => import('@/vet/pets/pages/clinical-management.component.vue'),
+                props: true
+            },
+            {
+                path: 'preventive',
+                name: 'PreventiveCare',
+                component: () => import('@/vet/pets/pages/preventive-care.component.vue'),
+                props: true
+            }
+        ]
+    },
     { path: '/profile', component: profileComponent },
     { path: '/petsClients', component: petsClients },
     { path: '/appointmentsClients', component: appointmentsClients},

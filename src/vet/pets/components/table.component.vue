@@ -17,9 +17,9 @@
   </tr>
   <tr v-for="pet in paginatedPets" :key="pet.id">
     <td>
-      <section class="avatar-container">
+      <section class="avatar-container" @click="goToHistory(pet.id)" style="cursor: pointer;">
         <img src="../../../assets/images/register-image.png" alt="avatar" class="avatar" />
-        {{ pet.petName }}
+        <span style="text-decoration: underline; color: #000000;">{{ pet.petName }}</span>
       </section>
     </td>
     <td>{{ pet.birdDate }}</td>
@@ -97,6 +97,13 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const goToHistory = (petId) => {
+  router.push({ name: 'PetHistory', params: { id: petId } });
+};
 
 const pets = ref([]);
 const search = ref('');

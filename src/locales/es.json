@@ -89,5 +89,19 @@
     "guardar": "Guardar",
     "searcher": "Buscar por nombre completo"
   },
-  "contactenos": "Contactenos"
+  "medicalHistory": {
+    "ear-infection": "Infección de oído",
+    "ear-infection-desc": "Tratado con gotas antibióticas. Seguimiento en 5 días.",
+    "vomiting-episode": "Episodio de vómitos",
+    "vomiting-episode-desc": "Dieta blanda iniciada. Monitorear hidratación y apetito.",
+    "limping-leg": "Cojeando de la pata izquierda",
+    "limping-leg-desc": "Rayos X programados. Reposo y movimiento limitado.",
+    "rabies-vaccine": "Vacunación - Rabia",
+    "rabies-vaccine-desc": "Vacuna antirrábica administrada. Próxima dosis en 1 año.",
+    "allergy-reaction": "Reacción alérgica",
+    "allergy-reaction-desc": "Irritación de la piel. Se recetaron antihistamínicos."
+  },
+  "contactenos": "Contáctenos"
 }
+
+
