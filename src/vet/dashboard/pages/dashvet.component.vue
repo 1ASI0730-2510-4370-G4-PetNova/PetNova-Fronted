@@ -34,57 +34,75 @@
     </div>
 
     <!-- Últimos pacientes -->
-    <div class="flex items-start gap-6 mb-6 w-full">
-      <!-- Tabla -->
-      <div class="w-4/5">
-        <h2 class="text-2xl font-semibold mb-4">{{ $t('dashboard.latestPatients') }}</h2>
-        <table class="w-full text-left border border-gray-300 rounded-md overflow-hidden text-lg">
-          <thead class="bg-gray-100">
-          <tr>
-            <th class="p-4">ID</th>
-            <th class="p-4">Tipo</th>
-            <th class="p-4">Dueño</th>
-            <th class="p-4">Ciudad</th>
-            <th class="p-4">Fecha</th>
-            <th class="p-4">Estado</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr v-for="p in dashboardData?.latestPatients" :key="p.id" class="border-t">
-            <td class="p-5">{{ p.id }}</td>
-            <td class="p-5">{{ p.kind }}</td>
-            <td class="p-5">{{ p.owner }}</td>
-            <td class="p-5">{{ p.city }}</td>
-            <td class="p-5">{{ p.date }}</td>
-            <td class="p-5">{{ p.status }}</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+    <!-- Contenedor externo que centra todo -->
+    <div class="w-full flex justify-center mb-6">
+      <!-- Contenedor interno limitado -->
+      <div class="flex gap-6 items-start max-w-6xl w-full px-4">
+        <!-- Tabla -->
+        <div class="flex-1">
+          <h2 class="text-2xl font-semibold mb-4">{{ $t('dashboard.latestPatients') }}</h2>
+          <table class="w-full text-left border border-gray-300 rounded-md overflow-hidden text-lg">
+            <thead class="bg-gray-100">
+            <tr>
+              <th class="p-6 ">ID</th>
+              <th class="p-6">Tipo</th>
+              <th class="p-6">Dueño</th>
+              <th class="p-6">Ciudad</th>
+              <th class="p-6">Fecha</th>
+              <th class="p-6">Estado</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="p in dashboardData?.latestPatients" :key="p.id" class="border-t">
+              <td class="p-5">{{ p.id }}</td>
+              <td class="p-5">{{ p.kind }}</td>
+              <td class="p-5">{{ p.owner }}</td>
+              <td class="p-5">{{ p.city }}</td>
+              <td class="p-5">{{ p.date }}</td>
+              <td class="p-5">{{ p.status }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
 
-      <!-- Imagen -->
-      <div class="w-1/3 flex justify-center">
-        <img src="@/assets/images/dashvet-analys-icon.png" alt="Análisis" class="w-7 h-7" />
+        <!-- Imagen alineada correctamente -->
+        <div class="flex items-center justify-center w-[100px]">
+          <img src="@/assets/images/dashvet-analys-icon.png" alt="Análisis" class="w-8 h-8" />
+        </div>
       </div>
     </div>
 
-    <!-- Reporte semanal -->
-    <div>
-      <DashboardCard :title="$t('dashboard.weeklyReport')">
-        <p><strong>{{ $t('dashboard.income') }}:</strong> ${{ dashboardData?.weeklyReport.income }}</p>
-        <p><strong>{{ $t('dashboard.outcome') }}:</strong> ${{ dashboardData?.weeklyReport.outcome }}</p>
+    <!-- Reporte semanal + Notificaciones como fila horizontal -->
+    <div class="grid grid-cols-3 gap-4 my-6 items-stretch">
+      <!-- Income -->
+      <DashboardCard title="Income this week 💰" class="!p-2 max-w-[180px]">
+        <div class="flex flex-col items-center gap-2 mt-4">
+          <img src="@/assets/images/dashvet-money-icon.png" alt="Income Icon" class="w-2 h-2" />
+          <span class="text-4xl font-extrabold text-green-600">${{ dashboardData?.weeklyReport.income }}</span>
+        </div>
       </DashboardCard>
-    </div>
 
-    <!-- Notificaciones -->
-    <div>
-      <DashboardCard :title="$t('dashboard.clientNotifications')">
-        <ul class="list-disc pl-5">
-          <li v-for="(n, index) in dashboardData?.notifications" :key="index">
+      <!-- Outcome -->
+      <DashboardCard title="Outcome this week 💸" class="!p-2 max-w-[180px]">
+        <div class="flex flex-col items-center gap-2 mt-4">
+          <img src="@/assets/images/dashvet-cash-icon.png" alt="Outcome Icon" class="w-2 h-2" />
+          <span class="text-4xl font-extrabold text-red-600">${{ dashboardData?.weeklyReport.outcome }}</span>
+        </div>
+      </DashboardCard>
+
+      <!-- Notificaciones -->
+      <DashboardCard :title="$t('dashboard.clientNotifications')" class="!p-4">
+        <ul class="list-disc pl-5 text-base">
+          <li
+              v-for="(n, index) in dashboardData?.notifications"
+              :key="index"
+              class="mb-6 leading-relaxed"
+          >
             {{ n }}
           </li>
         </ul>
       </DashboardCard>
+
     </div>
   </div>
 </template>
