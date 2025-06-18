@@ -22,7 +22,7 @@ import {$t} from "@primeuix/styled";
                         <span class="li-primary-options-text">{{ $t('navbar.mascotas') }}</span>
                     </li>
                 </router-link>
-                <router-link to="/profileClients" class="routering">
+                <router-link to="/appointmentsClients" class="routering">
                     <li class="li-primary-options">
                         <img src="../../assets/images/navbar-calendar-icon.png" alt="calendar">
                         <span class="li-primary-options-text">{{ $t('navbar.citas') }}</span>

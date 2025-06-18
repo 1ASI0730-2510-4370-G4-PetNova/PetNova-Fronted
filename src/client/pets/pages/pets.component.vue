@@ -3,7 +3,7 @@
     <MenuComponent />
     <div class="clients-content">
       <h1>{{ $t('clientes.nombre') }}</h1>
-      <input v-model="search" class="search-input" placeholder="{{ $t('clientes.searcher') }}" />
+      <input v-model="search" class="search-input" placeholder="Buscar" />
       <button class="add-pet-button" @click="openAddPetDialog">{{ $t('mascotas.agregar') }}</button>
 
       <table class="clients-table">
@@ -38,32 +38,39 @@
       </table>
 
       <div class="pagination">
-        <button @click="prevPage">{{ $t('pagination.prev') }}</button>
+        <button @click="prevPage">{{ $t('prev') }}</button>
         <span v-for="page in totalPages" :key="page" @click="currentPage = page" class="pagination-item">
           {{ page }}
         </span>
-        <button @click="nextPage">{{ $t('pagination.next') }}</button>
+        <button @click="nextPage">{{ $t('next') }}</button>
       </div>
     </div>
 
-    <PvDialog v-model:visible="addPetDialogVisible" header="{{ $t('mascotas.crear') }}" :style="{ width: '25rem' }">
-      <section>
+    <!-- Diálogo para agregar mascota -->
+    <PvDialog v-model:visible="addPetDialogVisible" header="Crear Mascota" :style="{ width: '30rem' }">
+      <section class="form-section">
         <label>{{ $t('mascotas.nombre') }}</label>
-        <PvInputText v-model="newPet.petName" class="input-field" />
+        <PvInputText v-model="newPet.petName" class="input-field" placeholder=" " />
+        
         <label>{{ $t('mascotas.cumpleanos') }}</label>
-        <PvInputText v-model="newPet.birdDate" class="input-field" />
+        <PvInputText v-model="newPet.birdDate" class="input-field" placeholder="DD/MM/YYYY" />
+        
         <label>{{ $t('mascotas.registro') }}</label>
-        <PvInputText v-model="newPet.registrationDate" class="input-field" />
+        <PvInputText v-model="newPet.registrationDate" class="input-field" placeholder="DD/MM/YYYY" />
+        
         <label>{{ $t('mascotas.raza') }}</label>
-        <PvInputText v-model="newPet.animalBreed" class="input-field" />
+        <PvInputText v-model="newPet.animalBreed" class="input-field" placeholder=" " />
+        
         <label>{{ $t('mascotas.genero') }}</label>
-        <PvInputText v-model="newPet.gender" class="input-field" />
+        <PvInputText v-model="newPet.gender" class="input-field" placeholder=" " />
+        
         <label>{{ $t('mascotas.hc') }}</label>
-        <PvInputText v-model="newPet.hc" class="input-field" />
+        <PvInputText v-model="newPet.hc" class="input-field" placeholder=" " />
       </section>
+      
       <template #footer>
-        <PvButton label="Cancel" @click="addPetDialogVisible = false" class="cancel-button"/>
-        <PvButton label="Save" @click="savePet" class="save-button"/>
+        <PvButton label="Cancelar" @click="addPetDialogVisible = false" class="cancel-button"/>
+        <PvButton label="Guardar" @click="savePet" class="save-button"/>
       </template>
     </PvDialog>
   </div>
@@ -187,5 +194,18 @@ onMounted(fetchPets);
 .save-button:hover,
 .cancel-button:hover {
   background-color: #4a90b7;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input-field {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
 }
 </style>
