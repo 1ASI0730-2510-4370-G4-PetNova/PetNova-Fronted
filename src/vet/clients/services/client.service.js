@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_URL = "https://fake-api-rose-psi.vercel.app/clients";
+const API_URL = "https://petnova-api.azurewebsites.net/clients";
 
 export const getClients = () => axios.get(API_URL);
 export const searchClients = (query) =>

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://fake-api-rose-psi.vercel.app/users';
+const API_URL = 'https://petnova-api.azurewebsites.net/users';
 
 export const getUsers = async () => {
   const response = await axios.get(API_URL);
