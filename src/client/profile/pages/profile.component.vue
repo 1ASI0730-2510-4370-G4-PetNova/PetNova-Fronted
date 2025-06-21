@@ -15,21 +15,29 @@
           <button :class="{ active: activeTab === 'picture' }" @click="activeTab = 'picture'">Profile picture</button>
         </section>
 
-        <!-- Pestaña Profile -->
+        <!-- Profile Tab -->
         <section v-if="activeTab === 'profile'" class="profile-tab">
           <div v-if="editing">
             <form @submit.prevent="saveProfile">
-              <label for="name">Name:</label>
-              <input id="name" v-model="profile.name" placeholder="NAME" />
+              <div class="field-container">
+                <label for="name">Full name:</label>
+                <input id="name" v-model="profile.name" placeholder="Carlos Soto Aguirre" />
+              </div>
 
-              <label for="lastname">Last name:</label>
-              <input id="lastname" v-model="profile.lastname" placeholder="LAST NAME..." />
+              <div class="field-container">
+                <label for="address">Address:</label>
+                <input id="address" v-model="profile.address" placeholder="AV. Mangopapaya #321-Lalandia" />
+              </div>
 
-              <label for="specialty">Specialty:</label>
-              <input id="specialty" v-model="profile.specialty" placeholder="SPECIALTY" />
+              <div class="field-container">
+                <label for="phone">Phone number:</label>
+                <input id="phone" v-model="profile.phone" placeholder="987654321" />
+              </div>
 
-              <label for="biography">Biography</label>
-              <textarea id="biography" v-model="profile.biography" placeholder="BIOGRAPHY..."></textarea>
+              <div class="field-container">
+                <label for="additional-info">Additional information:</label>
+                <textarea id="additional-info" v-model="profile.additionalInfo" placeholder="Enter any additional info here..."></textarea>
+              </div>
 
               <div class="button-group">
                 <button type="button" class="delete-button" @click="deleteProfile">Delete</button>
@@ -40,20 +48,20 @@
 
           <div v-else class="profile-static">
             <div class="field-box">
-              <strong>Name:</strong>
+              <strong>Full name:</strong>
               <div class="field-value">{{ profile.name || '-' }}</div>
             </div>
             <div class="field-box">
-              <strong>Last name:</strong>
-              <div class="field-value">{{ profile.lastname || '-' }}</div>
+              <strong>Address:</strong>
+              <div class="field-value">{{ profile.address || '-' }}</div>
             </div>
             <div class="field-box">
-              <strong>Specialty:</strong>
-              <div class="field-value">{{ profile.specialty || '-' }}</div>
+              <strong>Phone number:</strong>
+              <div class="field-value">{{ profile.phone || '-' }}</div>
             </div>
             <div class="field-box">
-              <strong>Biography:</strong>
-              <div class="field-value bio-text">{{ profile.biography || '-' }}</div>
+              <strong>Additional information:</strong>
+              <div class="field-value">{{ profile.additionalInfo || '-' }}</div>
             </div>
 
             <div class="button-group">
@@ -62,17 +70,14 @@
           </div>
         </section>
 
-        <!-- Pestaña Profile picture -->
+        <!-- Profile Picture Tab -->
         <section v-if="activeTab === 'picture'" class="picture-tab">
           <div class="picture-container">
             <div v-if="imageSaved">
               <div class="avatar-box">
                 <img :src="savedImage || defaultImage" alt="Profile" />
-                <!-- Texto "Profile" oculto al estar guardada la imagen -->
               </div>
-
               <p class="full-name">{{ fullName }}</p>
-
               <div class="button-group">
                 <button class="edit-button" @click="editImage">Edit</button>
               </div>
@@ -81,7 +86,6 @@
             <div v-else>
               <div class="avatar-box">
                 <img :src="imagePreview || savedImage || defaultImage" alt="Profile" />
-                <span>Profile</span>  <!-- Solo visible en modo edición -->
               </div>
 
               <p class="image-description">Image preview</p>
@@ -112,14 +116,13 @@ const activeTab = ref('profile');
 
 const profile = ref({
   name: '',
-  lastname: '',
-  specialty: '',
-  biography: ''
+  address: '',
+  phone: '',
+  additionalInfo: ''
 });
 
-const editing = ref(false);  // Inicia como false porque ya se guardaron los datos al editar
+const editing = ref(false);
 
-// Imagenes
 const defaultImage = '../../assets/images/avatar-placeholder.png';
 const savedImage = ref('');
 const imagePreview = ref('');
@@ -128,9 +131,8 @@ const imageSaved = ref(false);
 
 const fullName = computed(() => {
   const n = profile.value.name.trim();
-  const l = profile.value.lastname.trim();
-  if (n || l) {
-    return `${n} ${l}`.trim();
+  if (n) {
+    return `${n}`.trim();
   }
   return '-';
 });
@@ -166,16 +168,16 @@ const editImage = () => {
 };
 
 const saveProfile = () => {
-  editing.value = false; // Después de guardar, se cambia el estado de "editing" a false
+  editing.value = false;
   alert('Profile saved!');
 };
 
 const deleteProfile = () => {
   profile.value = {
     name: '',
-    lastname: '',
-    specialty: '',
-    biography: ''
+    address: '',
+    phone: '',
+    additionalInfo: ''
   };
   editing.value = true;
 };
@@ -270,6 +272,10 @@ h2 {
   min-height: 80px;
 }
 
+.field-container {
+  margin-bottom: 18px;
+}
+
 .button-group {
   margin-top: 20px;
   display: flex;
@@ -298,34 +304,6 @@ h2 {
 .edit-button:hover {
   background-color: #6abfe3;
   color: white;
-}
-
-.profile-static {
-  width: 100%;
-}
-
-.field-box {
-  background-color: transparent;
-  border: 1.5px solid black;
-  border-radius: 10px;
-  padding: 20px 25px;
-  margin-bottom: 18px;
-  width: 100%;
-  box-sizing: border-box;
-  min-height: 60px;
-}
-
-.field-value {
-  margin-top: 8px;
-  font-size: 17px;
-  color: #000000;
-  min-height: 40px;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-}
-
-.bio-text {
-  white-space: pre-wrap;
 }
 
 .picture-tab {
@@ -363,15 +341,6 @@ h2 {
   height: 130px;
   border-radius: 50%;
   object-fit: cover;
-}
-
-.avatar-box span {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  color: black;
-  font-weight: 400;
-  font-size: 14px;
 }
 
 .full-name {
