@@ -13,7 +13,7 @@
 
         <span class="input-label">{{ $t('signup.usuario-label') }}</span>
         <section class="input">
-          <input v-model="user" type="text" :placeholder="$t('signup.usuario')" required />
+          <input v-model="username" type="text" :placeholder="$t('signup.usuario')" required />
         </section>
 
         <span class="input-label">{{ $t('signup.contrasena-label') }}</span>
@@ -22,9 +22,9 @@
         </section>
         <section class="button-container">
           <section class="radio-buttons">
-            <input type="radio" id="client" value="client" v-model="role" required />
-            <label for="client">{{ $t('signup.options.option1') }}</label>
             <input type="radio" id="admin" value="admin" v-model="role" required />
+            <label for="client">{{ $t('signup.options.option1') }}</label>
+            <input type="radio" id="client" value="client" v-model="role" required />
             <label for="admin">{{ $t('signup.options.option2') }}</label>
           </section>
         </section>
@@ -44,12 +44,12 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 
 const email = ref('');
-const user = ref('');
+const username = ref('');
 const password = ref('');
 const role = ref('admin');
 
 const handleRegister = async () => {
-  const newUser = new User({ email: email.value, user: user.value, password: password.value, role: role.value });
+  const newUser = new User({ email: email.value, username: username.value, password: password.value, role: role.value });
 
   if (!User.isValid(newUser)) {
     return;
