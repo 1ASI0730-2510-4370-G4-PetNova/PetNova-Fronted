@@ -1,7 +1,7 @@
 export default class User {
-  constructor({ email = '', username = '', password = '', role = ''} = {}) {
+  constructor({ email = '', user = '', password = '', role = ''} = {}) {
     this.email = email;
-    this.username = username;
+    this.user = user;
     this.password = password;
     this.role = role;
   }
@@ -9,7 +9,7 @@ export default class User {
   static isValid(user) {
     return (
       user.email &&
-      user.username &&
+      user.user &&
       user.password &&
       user.role
     );
