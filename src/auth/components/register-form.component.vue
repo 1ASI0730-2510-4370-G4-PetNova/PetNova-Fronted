@@ -22,9 +22,9 @@
         </section>
         <section class="button-container">
           <section class="radio-buttons">
-            <input type="radio" id="client" value="client" v-model="role" required />
-            <label for="client">{{ $t('signup.options.option1') }}</label>
             <input type="radio" id="admin" value="admin" v-model="role" required />
+            <label for="client">{{ $t('signup.options.option1') }}</label>
+            <input type="radio" id="client" value="client" v-model="role" required />
             <label for="admin">{{ $t('signup.options.option2') }}</label>
           </section>
         </section>

@@ -38,19 +38,28 @@ const handleLogin = async () => {
   }
 
   try {
-    const users = await getUsers();
+    const users = await getUsers();  // Obtiene todos los usuarios
     const foundUser = users.find(
-      user => user.email === email.value && user.password === password.value
+      user => user.email === email.value && user.password === password.value  // Busca el usuario con el correo y la contraseña
     );
 
     if (foundUser) {
-      router.push('/clients');
+      // Si el rol es 'client', redirige a la página de clientes
+      if (foundUser.role === 'client') {
+        router.push('/profileClients');  // Redirige al perfil del cliente
+      }
+      // Si el rol es 'admin' o 'vet', redirige a la página común
+      else if (foundUser.role === 'admin' || foundUser.role === 'vet') {
+        router.push('/profile');  // Redirige a la página común para admin y vet
+      }
     } else {
+      console.error('Usuario o contraseña incorrectos');
     }
   } catch (error) {
     console.error('Error al iniciar sesión:', error);
   }
 };
+
 </script>
 
 <style scoped>
