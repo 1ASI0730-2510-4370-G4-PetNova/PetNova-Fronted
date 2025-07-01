@@ -1,23 +1,13 @@
-import http from '../../shared/services/http-common';
+import axios from 'axios';
 
-const API_URL = '/Auth';
+const API_URL = 'https://fake-api-rose-psi.vercel.app/users';
 
 export const getUsers = async () => {
-  const response = await http.get(API_URL);
+  const response = await axios.get(API_URL);
   return response.data;
 };
 
 export const createUser = async (user) => {
-  const response = await http.post(`${API_URL}/register`, user);
-  return response.data;
-};
-
-export const login = async (user) => {
-  const data = {
-    usernameOrEmail: user.email,
-    password: user.password
-  }
-
-  const response = await http.post(`${API_URL}/login`, data);
+  const response = await axios.post(API_URL, user);
   return response.data;
 };

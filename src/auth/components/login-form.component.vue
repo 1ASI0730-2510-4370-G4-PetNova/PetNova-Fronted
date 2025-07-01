@@ -26,7 +26,6 @@
 <script setup>
 import { ref } from 'vue';
 import { getUsers } from '../services/user.service';
-import { login } from '../services/user.service';
 import { useRouter } from 'vue-router';
 
 const email = ref('');
@@ -39,23 +38,14 @@ const handleLogin = async () => {
   }
 
   try {
-    const user = new User({ email: email.value, password: password.value });
-    const users = await login(user);  // Obtiene todos los usuarios desde la base de datos
+    const users = await getUsers();
     const foundUser = users.find(
-      user => user.email === email.value && user.password === password.value  // Busca el usuario que coincida con el correo y contraseña
+      user => user.email === email.value && user.password === password.value
     );
 
     if (foundUser) {
-      // Si el rol es 'client', redirige a la página de clientes
-      if (foundUser.role === 'client') {
-        router.push('/profileClients');  // Redirige al dashboard del cliente
-      }
-      // Si el rol es 'admin' o 'vet', redirige a la misma página (por ejemplo, /admin-vet-dashboard)
-      else if (foundUser.role === 'admin' || foundUser.role === 'vet') {
-        router.push('/pets');  // Redirige a la página común para admin y vet
-      }
+      router.push('/clients');
     } else {
-      console.error('Usuario o contraseña incorrectos');
     }
   } catch (error) {
     console.error('Error al iniciar sesión:', error);
