@@ -16,7 +16,7 @@
           />
           <input
             v-model="search"
-            :placeholder="$t('mascotas.buscar')"
+            :placeholder="$t('Buscar')"
             class="search-input"
           />
         </div>
