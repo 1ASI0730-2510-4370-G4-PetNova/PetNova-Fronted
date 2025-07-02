@@ -88,14 +88,10 @@ const openAddDialog = () => {
 
 const createClient = async () => {
   if (!isValidClient(newClient.value)) return;
-  try {
-    await createClientService(newClient.value);
-  } catch (error) {
-    console.log("Error al crear, pero continuando...");
-  }
+  await createClientService(newClient.value);
+  window.location.reload();
   createVisible.value = false;
   newClient.value = new Client();
-  window.location.reload();
 };
 
 const handleSearchResults = (results) => {

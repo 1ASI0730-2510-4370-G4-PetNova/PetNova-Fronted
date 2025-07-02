@@ -12,76 +12,57 @@
       </section>
       <TableComponent :appointments="filteredAppointments" :search="search" />
     </section>
-    <PvDialog
-      v-model:visible="createVisible"
-      modal
-      :header="$t('citas.crear-cita')"
-      :style="{ width: '25rem' }"
-    >
+    <PvDialog v-model:visible="createVisible" modal :header="$t('citas.crear-cita')" :style="{ width: '25rem' }">
       <section>
         <section class="flex flex-column mb-1">
-          <label>{{ $t("citas.nombre") }}</label>
+          <label>{{ $t('citas.nombre') }}</label>
           <PvInputText v-model="newAppointment.petName" class="flex-auto" />
         </section>
         <section class="flex flex-column mb-1">
-          <label>{{ $t("citas.inicio") }}</label>
+          <label>{{ $t('citas.inicio') }}</label>
           <PvInputText v-model="newAppointment.startDate" class="flex-auto" />
         </section>
         <section class="flex flex-column mb-1">
-          <label>{{ $t("citas.cliente") }}</label>
+          <label>{{ $t('citas.cliente') }}</label>
           <PvInputText v-model="newAppointment.client" class="flex-auto" />
         </section>
         <section class="flex flex-column mb-1">
-          <label>{{ $t("citas.numero") }}</label>
-          <PvInputText
-            v-model="newAppointment.contactNumber"
-            class="flex-auto"
-          />
+          <label>{{ $t('citas.numero') }}</label>
+          <PvInputText v-model="newAppointment.contactNumber" class="flex-auto" />
         </section>
         <section class="flex flex-column mb-1">
-          <label>{{ $t("citas.estado") }}</label>
+          <label>{{ $t('citas.estado') }}</label>
           <PvInputText v-model="newAppointment.status" class="flex-auto" />
         </section>
         <section class="flex flex-column">
-          <label>{{ $t("citas.tipo-evento") }}</label>
+          <label>{{ $t('citas.tipo-evento') }}</label>
           <PvInputText v-model="newAppointment.eventType" class="flex-auto" />
         </section>
       </section>
       <template #footer>
-        <PvButton
-          :label="$t('citas.cancelar')"
-          text
-          severity="secondary"
-          @click="createVisible = false"
-        />
-        <PvButton
-          :label="$t('citas.guardar')"
-          outlined
-          severity="danger"
-          @click="createAppointment"
-          :disabled="!isValidAppointment(newAppointment)"
-        />
+        <PvButton :label="$t('citas.cancelar')" text severity="secondary" @click="createVisible = false" />
+        <PvButton :label="$t('citas.guardar')" outlined severity="danger" @click="createAppointment" :disabled="!isValidAppointment(newAppointment)" />
       </template>
     </PvDialog>
   </article>
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { createAppointment as createAppointmentService } from "../services/appointment.service.js";
-import Appointment from "../models/appointment.model.js";
+import { ref } from 'vue';
+import { createAppointment as createAppointmentService} from '../services/appointment.service.js';
+import Appointment from '../models/appointment.model.js';
 
-import MenuComponent from "../../../shared/components/menu.component.vue";
-import TableComponent from "../components/table.component.vue";
-import Searcher from "../components/searcher.component.vue";
-import Button from "../components/button.component.vue";
-import Notification from "../components/notification.component.vue";
-import LanguageSwitch from "../../../shared/components/language-switcher.component.vue";
+import MenuComponent from '../../../shared/components/menu.component.vue';
+import TableComponent from '../components/table.component.vue';
+import Searcher from '../components/searcher.component.vue';
+import Button from '../components/button.component.vue';
+import Notification from '../components/notification.component.vue';
+import LanguageSwitch from '../../../shared/components/language-switcher.component.vue';
 
 const createVisible = ref(false);
 const newAppointment = ref(new Appointment());
 const filteredAppointments = ref([]);
-const search = ref("");
+const search = ref('');
 
 const isValidAppointment = (appointment) => Appointment.isValid(appointment);
 
@@ -91,14 +72,10 @@ const openAddDialog = () => {
 
 const createAppointment = async () => {
   if (!isValidAppointment(newAppointment.value)) return;
-  try {
-    await createAppointmentService(newAppointment.value);
-  } catch (error) {
-    console.log("Error al crear, pero continuando...");
-  }
+  await createAppointmentService(newAppointment.value);
+  window.location.reload()
   createVisible.value = false;
   newAppointment.value = new Appointment();
-  window.location.reload();
 };
 
 const handleSearchResults = (results) => {
