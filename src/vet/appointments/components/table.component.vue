@@ -2,105 +2,168 @@
   <table>
     <thead>
       <tr>
-        <th>{{ $t('citas.nombre') }}</th>
-        <th>{{ $t('citas.inicio') }}</th>
-        <th>{{ $t('citas.cliente') }}</th>
-        <th>{{ $t('citas.numero') }}</th>
-        <th>{{ $t('citas.estado') }}</th>
-        <th>{{ $t('citas.tipo-evento') }}</th>
-        <th>{{ $t('citas.acciones') }}</th>
+        <th>{{ $t("citas.nombre") }}</th>
+        <th>{{ $t("citas.inicio") }}</th>
+        <th>{{ $t("citas.cliente") }}</th>
+        <th>{{ $t("citas.numero") }}</th>
+        <th>{{ $t("citas.estado") }}</th>
+        <th>{{ $t("citas.tipo-evento") }}</th>
+        <th>{{ $t("citas.acciones") }}</th>
       </tr>
     </thead>
     <tbody>
-  <tr v-if="paginatedAppointments.length === 0">
-    <td colspan="8" class="no-data">{{ $t('citas.no-disponible') }}</td>
-  </tr>
-  <tr v-for="appointment in paginatedAppointments" :key="appointment.id">
-    <td>
-      <section class="avatar-container">
-        <img src="../../../assets/images/register-image.png" alt="avatar" class="avatar" />
-        {{ appointment.petName }}
-      </section>
-    </td>
-    <td>{{ appointment.startDate }}</td>
-    <td>{{ appointment.client }}</td>
-    <td>{{ appointment.contactNumber }}</td>
-    <td>{{ appointment.status }}</td>
-    <td>{{ appointment.eventType }}</td>
-    <td class="label-actions">
-      <span @click="openEditDialog(appointment)" class="label-edit-action">
-        <span>Edit</span>
-        <img src="../../../assets/images/edit-table.icon.png" alt="edit" class="action-icon" />
-      </span>
-      <span @click="openDeleteDialog(appointment)" class="label-delete-action">
-        <img src="../../../assets/images/delete-table-icon.png" alt="delete" class="action-icon" />
-      </span>
-    </td>
-  </tr>
-</tbody>
+      <tr v-if="paginatedAppointments.length === 0">
+        <td colspan="8" class="no-data">{{ $t("citas.no-disponible") }}</td>
+      </tr>
+      <tr v-for="appointment in paginatedAppointments" :key="appointment.id">
+        <td>
+          <section class="avatar-container">
+            <img
+              src="../../../assets/images/register-image.png"
+              alt="avatar"
+              class="avatar"
+            />
+            {{ appointment.petName }}
+          </section>
+        </td>
+        <td>{{ appointment.startDate }}</td>
+        <td>{{ appointment.client }}</td>
+        <td>{{ appointment.contactNumber }}</td>
+        <td>{{ appointment.status }}</td>
+        <td>{{ appointment.eventType }}</td>
+        <td class="label-actions">
+          <span @click="openEditDialog(appointment)" class="label-edit-action">
+            <span>Edit</span>
+            <img
+              src="../../../assets/images/edit-table.icon.png"
+              alt="edit"
+              class="action-icon"
+            />
+          </span>
+          <span
+            @click="openDeleteDialog(appointment)"
+            class="label-delete-action"
+          >
+            <img
+              src="../../../assets/images/delete-table-icon.png"
+              alt="delete"
+              class="action-icon"
+            />
+          </span>
+        </td>
+      </tr>
+    </tbody>
   </table>
 
   <section class="pagination">
     <section @click="prevPage">
-      <img src="../../../assets/images/left-icon.png" alt="left icon" class="icons-pagination" />
+      <img
+        src="../../../assets/images/left-icon.png"
+        alt="left icon"
+        class="icons-pagination"
+      />
     </section>
-    <section v-for="page in totalPages" :key="page" @click="currentPage = page" class="pagination-item">
+    <section
+      v-for="page in totalPages"
+      :key="page"
+      @click="currentPage = page"
+      class="pagination-item"
+    >
       {{ page }}
     </section>
     <section @click="nextPage">
-      <img src="../../../assets/images/rigth-icon.png" alt="right icon" class="icons-pagination" />
+      <img
+        src="../../../assets/images/rigth-icon.png"
+        alt="right icon"
+        class="icons-pagination"
+      />
     </section>
   </section>
 
-  <PvDialog v-model:visible="editVisible" modal :header="$t('citas.editar-cita')" :style="{ width: '25rem' }">
-
+  <PvDialog
+    v-model:visible="editVisible"
+    modal
+    :header="$t('citas.editar-cita')"
+    :style="{ width: '25rem' }"
+  >
     <section>
       <section class="flex flex-column mb-1">
-        <label>{{ $t('citas.nombre') }}</label>
+        <label>{{ $t("citas.nombre") }}</label>
         <PvInputText v-model="editedAppointment.petName" class="flex-auto" />
       </section>
       <section class="flex flex-column mb-1">
-        <label>{{ $t('citas.inicio') }}</label>
+        <label>{{ $t("citas.inicio") }}</label>
         <PvInputText v-model="editedAppointment.startDate" class="flex-auto" />
       </section>
       <section class="flex flex-column mb-1">
-        <label>{{ $t('citas.cliente') }}</label>
+        <label>{{ $t("citas.cliente") }}</label>
         <PvInputText v-model="editedAppointment.client" class="flex-auto" />
       </section>
       <section class="flex flex-column mb-1">
-        <label>{{ $t('citas.numero') }}</label>
-        <PvInputText v-model="editedAppointment.contactNumber" class="flex-auto" />
+        <label>{{ $t("citas.numero") }}</label>
+        <PvInputText
+          v-model="editedAppointment.contactNumber"
+          class="flex-auto"
+        />
       </section>
       <section class="flex flex-column mb-1">
-        <label>{{ $t('citas.estado') }}</label>
+        <label>{{ $t("citas.estado") }}</label>
         <PvInputText v-model="editedAppointment.status" class="flex-auto" />
       </section>
       <section class="flex flex-column">
-        <label>{{ $t('citas.tipo-evento') }}</label>
+        <label>{{ $t("citas.tipo-evento") }}</label>
         <PvInputText v-model="editedAppointment.eventType" class="flex-auto" />
       </section>
     </section>
     <template #footer>
-      <PvButton :label="$t('citas.cancelar')" text severity="secondary" @click="editVisible = false" />
-      <PvButton :label="$t('citas.guardar') " outlined severity="danger" @click="saveAppointment" :disabled="!isValidAppointment(editedAppointment)" />
+      <PvButton
+        :label="$t('citas.cancelar')"
+        text
+        severity="secondary"
+        @click="editVisible = false"
+      />
+      <PvButton
+        :label="$t('citas.guardar')"
+        outlined
+        severity="danger"
+        @click="saveAppointment"
+        :disabled="!isValidAppointment(editedAppointment)"
+      />
     </template>
   </PvDialog>
 
-  <PvDialog v-model:visible="deleteVisible" modal :header="$t('citas.eliminar-cita')" :style="{ width: '25rem' }">
-    <span class="text-surface-500 dark:text-surface-400 block">{{ $t('citas.estas-seguro') }}</span>
+  <PvDialog
+    v-model:visible="deleteVisible"
+    modal
+    :header="$t('citas.eliminar-cita')"
+    :style="{ width: '25rem' }"
+  >
+    <span class="text-surface-500 dark:text-surface-400 block">{{
+      $t("citas.estas-seguro")
+    }}</span>
     <template #footer>
-      <PvButton :label="$t('citas.cancelar') " text severity="secondary" @click="deleteVisible = false" />
-      <PvButton :label="$t('citas.eliminar') " outlined severity="danger" @click="confirmDelete" />
+      <PvButton
+        :label="$t('citas.cancelar')"
+        text
+        severity="secondary"
+        @click="deleteVisible = false"
+      />
+      <PvButton
+        :label="$t('citas.eliminar')"
+        outlined
+        severity="danger"
+        @click="confirmDelete"
+      />
     </template>
   </PvDialog>
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
-import axios from 'axios';
+import { ref, computed, onMounted } from "vue";
+import axios from "axios";
 
 const appointments = ref([]);
-const search = ref('');
+const search = ref("");
 const currentPage = ref(1);
 const perPage = 5;
 const editVisible = ref(false);
@@ -109,20 +172,38 @@ const editedAppointment = ref({});
 const appointmentToDelete = ref(null);
 
 const fetchAppointments = async () => {
-  const res = await axios.get('https://fake-api-rose-psi.vercel.app/appointments');
+  const res = await axios.get(
+    "https://fake-api-rose-psi.vercel.app/appointments"
+  );
   appointments.value = res.data;
 };
 
 const isValidAppointment = (appointment) => {
-  return appointment.petName && appointment.startDate && appointment.client && appointment.contactNumber && appointment.status && appointment.eventType;
+  return (
+    appointment.petName &&
+    appointment.startDate &&
+    appointment.client &&
+    appointment.contactNumber &&
+    appointment.status &&
+    appointment.eventType
+  );
 };
 
 const filteredAppointments = computed(() => {
-  return appointments.value.filter(appointment => appointment.petName.toLowerCase().includes(search.value.toLowerCase()));
+  return appointments.value.filter((appointment) =>
+    appointment.petName.toLowerCase().includes(search.value.toLowerCase())
+  );
 });
 
-const totalPages = computed(() => Math.ceil(filteredAppointments.value.length / perPage));
-const paginatedAppointments = computed(() => filteredAppointments.value.slice((currentPage.value - 1) * perPage, currentPage.value * perPage));
+const totalPages = computed(() =>
+  Math.ceil(filteredAppointments.value.length / perPage)
+);
+const paginatedAppointments = computed(() =>
+  filteredAppointments.value.slice(
+    (currentPage.value - 1) * perPage,
+    currentPage.value * perPage
+  )
+);
 
 const openEditDialog = (appointment) => {
   editedAppointment.value = { ...appointment };
@@ -131,9 +212,16 @@ const openEditDialog = (appointment) => {
 
 const saveAppointment = async () => {
   if (!isValidAppointment(editedAppointment.value)) return;
-  await axios.put(`https://fake-api-rose-psi.vercel.app/appointments/${editedAppointment.value.id}`, editedAppointment.value);
+  try {
+    await axios.put(
+      `https://fake-api-rose-psi.vercel.app/appointments/${editedAppointment.value.id}`,
+      editedAppointment.value
+    );
+  } catch (error) {
+    console.log("Error al guardar, pero continuando...");
+  }
   editVisible.value = false;
-  fetchAppointments();
+  await fetchAppointments();
 };
 
 const openDeleteDialog = (appointment) => {
@@ -142,7 +230,9 @@ const openDeleteDialog = (appointment) => {
 };
 
 const confirmDelete = async () => {
-  await axios.delete(`https://fake-api-rose-psi.vercel.app/appointments/${appointmentToDelete.value.id}`);
+  await axios.delete(
+    `https://fake-api-rose-psi.vercel.app/appointments/${appointmentToDelete.value.id}`
+  );
   deleteVisible.value = false;
   fetchAppointments();
 };
@@ -157,7 +247,6 @@ const nextPage = () => {
 
 onMounted(fetchAppointments);
 </script>
-
 
 <style scoped>
 table {
@@ -210,7 +299,7 @@ tr {
   justify-content: center;
   width: 70%;
   margin: auto;
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   padding: 10px 1px;
   border-radius: 12px;
 }
@@ -264,7 +353,7 @@ tr {
   margin-right: 16px;
   justify-content: center;
   align-items: center;
-  background-color: #6ABFE3;
+  background-color: #6abfe3;
   color: white;
   font-size: 40px;
 }

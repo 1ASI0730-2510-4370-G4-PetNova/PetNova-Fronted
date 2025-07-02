@@ -204,12 +204,16 @@ const openEditDialog = (client) => {
 
 const saveClient = async () => {
   if (!isValidClient(editedClient.value)) return;
-  await axios.put(
-    `https://fake-api-rose-psi.vercel.app/clients/${editedClient.value.id}`,
-    editedClient.value
-  );
+  try {
+    await axios.put(
+      `https://fake-api-rose-psi.vercel.app/clients/${editedClient.value.id}`,
+      editedClient.value
+    );
+  } catch (error) {
+    console.log("Error al guardar, pero continuando...");
+  }
   editVisible.value = false;
-  fetchClients();
+  await fetchClients();
 };
 
 const openDeleteDialog = (client) => {
@@ -219,7 +223,7 @@ const openDeleteDialog = (client) => {
 
 const confirmDelete = async () => {
   await axios.delete(
-    `http://localhost:3000/clients/${clientToDelete.value.id}`
+    `https://fake-api-rose-psi.vercel.app/clients/${clientToDelete.value.id}`
   );
   deleteVisible.value = false;
   fetchClients();
