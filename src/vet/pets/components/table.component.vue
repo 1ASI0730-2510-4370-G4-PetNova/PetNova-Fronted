@@ -28,13 +28,13 @@
               class="avatar"
             />
             <span style="text-decoration: underline; color: #000000">{{
-              pet.petName
+              pet.name
             }}</span>
           </section>
         </td>
-        <td>{{ pet.birdDate }}</td>
+        <td>{{ pet.dateOfBirth }}</td>
         <td>{{ pet.registrationDate }}</td>
-        <td>{{ pet.animalBreed }}</td>
+        <td>{{ pet.breed }}</td>
         <td>{{ pet.gender }}</td>
         <td>{{ pet.hc }}</td>
         <td class="label-actions">
@@ -92,11 +92,11 @@
     <section>
       <section class="flex flex-column mb-1">
         <label>{{ $t("mascotas.nombre") }}</label>
-        <PvInputText v-model="editedPet.petName" class="flex-auto" />
+        <PvInputText v-model="editedPet.name" class="flex-auto" />
       </section>
       <section class="flex flex-column mb-1">
         <label>{{ $t("mascotas.cumpleanos") }}</label>
-        <PvInputText v-model="editedPet.birdDate" class="flex-auto" />
+        <PvInputText v-model="editedPet.dateOfBirth" class="flex-auto" />
       </section>
       <section class="flex flex-column mb-1">
         <label>{{ $t("mascotas.registro") }}</label>
@@ -104,7 +104,7 @@
       </section>
       <section class="flex flex-column mb-1">
         <label>{{ $t("mascotas.raza") }}</label>
-        <PvInputText v-model="editedPet.animalBreed" class="flex-auto" />
+        <PvInputText v-model="editedPet.breed" class="flex-auto" />
       </section>
       <section class="flex flex-column mb-1">
         <label>{{ $t("mascotas.genero") }}</label>

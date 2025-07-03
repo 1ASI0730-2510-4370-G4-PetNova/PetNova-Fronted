@@ -2,7 +2,8 @@
   "clients": [
     {
       "id": "26ed",
-      "fullName": "fghkghjkghjkhjk",
+      "firstName": "fghkghjkghjkhjk",
+      "lastName": "ghjkhjkhjkhjkhj",
       "phone": "wer",
       "email": "wer",
       "address": "er",
@@ -11,7 +12,8 @@
     },
     {
       "id": "bdd9",
-      "fullName": "sdf",
+      "firstName": "sdf",
+      "lastName": "sdf",
       "phone": "sdf",
       "email": "sdf",
       "address": "sdfs",
@@ -20,7 +22,8 @@
     },
     {
       "id": "5dec",
-      "fullName": "r",
+      "firstName": "r",
+      "lastName": "r",
       "phone": "r",
       "email": "r",
       "address": "r",
@@ -29,7 +32,8 @@
     },
     {
       "id": "72e1",
-      "fullName": "sfdg",
+      "firstName": "sfdg",
+      "lastName": "sdfg",
       "phone": "sdfg",
       "email": "dfgdf",
       "address": "gdf",
@@ -40,29 +44,35 @@
   "pets": [
     {
       "id": "af3b",
-      "petName": "asdf",
-      "birdDate": "sdf",
-      "registrationDate": "sdf",
-      "animalBreed": "sdf",
+      "name": "asdf",
+      "species": "sadasd",
+      "breed": "sdf",
+      "dateOfBirth": "sdf",
+      "color": "brown",
       "gender": "sdf",
+      "registrationDate": "sdf",
       "hc": "sdf"
     },
     {
       "id": "0367",
-      "petName": "ety",
-      "birdDate": "rty",
-      "registrationDate": "rty",
-      "animalBreed": "ty",
+      "name": "ety",
+      "species": "sadfhh",
+      "breed": "ty",
+      "dateOfBirth": "rty",
+      "color": "brown",
       "gender": "yui",
+      "registrationDate": "rty",
       "hc": "yui"
     },
     {
       "id": "a021",
-      "petName": "dfg",
-      "birdDate": "hfgh",
-      "registrationDate": "fg",
-      "animalBreed": "fgh",
+      "name": "dfg",
+      "species": "jfkkas",
+      "breed": "fgh",
+      "dateOfBirth": "hfgh",
+      "color": "brown",
       "gender": "fgh",
+      "registrationDate": "fg",
       "hc": "fgh"
     }
   ],
@@ -107,20 +117,24 @@
     {
       "id": "f027",
       "petName": "dfh",
-      "startDate": "fgh",
+      "appointmentDate": "fgh",
       "client": "fgh",
+      "reason": "fgh",
       "contactNumber": "fgh",
       "status": "fgh",
-      "eventType": "fgh"
+      "eventType": "fgh",
+      "notes": "fgh"
     },
     {
       "id": "54d6",
       "petName": "ghj",
-      "startDate": "ghj",
+      "appointmentDate": "ghj",
       "client": "ghj",
+      "reason": "ghj",
       "contactNumber": "ghj",
       "status": "ghj",
-      "eventType": "ghj"
+      "eventType": "ghj",
+      "notes": "ghj"
     }
   ],
   "notifications": [

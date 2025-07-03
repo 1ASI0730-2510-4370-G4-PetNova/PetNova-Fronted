@@ -1,20 +1,24 @@
 export default class Pet {
-  constructor({ petName = '', birdDate = '', registrationDate = '', animalBreed = '', gender = '', hc = '' } = {}) {
-    this.petName = petName;
-    this.birdDate = birdDate;
-    this.registrationDate = registrationDate;
-    this.animalBreed = animalBreed;
+  constructor({ name = '', species = '', breed = '', dateOfBirth = '', color = '', gender = '', registrationDate = '', hc = '' } = {}) {
+    this.name = name;
+    this.species = species;
+    this.breed = breed;
+    this.dateOfBirth = dateOfBirth;
+    this.color = color;
     this.gender = gender;
+    this.registrationDate = registrationDate;
     this.hc = hc;
   }
 
   static isValid(pet) {
     return (
-      pet.petName &&
-      pet.birdDate &&
-      pet.registrationDate &&
-      pet.animalBreed &&
+      pet.name &&
+      pet.species &&
+      pet.breed &&
+      pet.dateOfBirth &&
+      pet.color &&
       pet.gender &&
+      pet.registrationDate &&
       pet.hc
     );
   }

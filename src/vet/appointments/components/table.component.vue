@@ -26,7 +26,7 @@
             {{ appointment.petName }}
           </section>
         </td>
-        <td>{{ appointment.startDate }}</td>
+        <td>{{ appointment.appointmentDate }}</td>
         <td>{{ appointment.client }}</td>
         <td>{{ appointment.contactNumber }}</td>
         <td>{{ appointment.status }}</td>

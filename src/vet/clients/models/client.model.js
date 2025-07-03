@@ -1,15 +1,17 @@
 export default class Client {
   constructor({
-    fullName = "",
+    firstName = "",
+                lastName = "",
+                email = "",
     phone = "",
-    email = "",
     address = "",
     status = "",
     hc = "",
   } = {}) {
-    this.fullName = fullName;
-    this.phone = phone;
+    this.firstName = firstName;
+    this.lastName = lastName;
     this.email = email;
+    this.phone = phone;
     this.address = address;
     this.status = status;
     this.hc = hc;
@@ -17,7 +19,8 @@ export default class Client {
 
   static isValid(client) {
     return (
-      client.fullName &&
+      client.firstName &&
+      client.lastName &&
       client.phone &&
       client.email &&
       client.address &&

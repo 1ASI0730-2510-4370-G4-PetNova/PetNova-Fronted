@@ -16,11 +16,11 @@
       <section>
         <section class="flex flex-column mb-1">
           <label>{{ $t('mascotas.nombre') }}</label>
-          <PvInputText v-model="newPet.petName" class="flex-auto" />
+          <PvInputText v-model="newPet.name" class="flex-auto" />
         </section>
         <section class="flex flex-column mb-1">
           <label>{{ $t('mascotas.cumpleanos') }}</label>
-          <PvInputText v-model="newPet.birdDate" class="flex-auto" />
+          <PvInputText v-model="newPet.dateOfBirth" class="flex-auto" />
         </section>
         <section class="flex flex-column mb-1">
           <label>{{ $t('mascotas.registro') }}</label>
@@ -28,7 +28,7 @@
         </section>
         <section class="flex flex-column mb-1">
           <label>{{ $t('mascotas.raza') }}</label>
-          <PvInputText v-model="newPet.animalBreed" class="flex-auto" />
+          <PvInputText v-model="newPet.breed" class="flex-auto" />
         </section>
         <section class="flex flex-column mb-1">
           <label>{{ $t('mascotas.genero') }}</label>

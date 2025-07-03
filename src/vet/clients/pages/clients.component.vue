@@ -21,7 +21,7 @@
       <section>
         <section class="flex flex-column mb-1">
           <label>{{ $t("clientes.nombre") }}</label>
-          <PvInputText v-model="newClient.fullName" class="flex-auto" />
+          <PvInputText v-model="newClient.firstName" class="flex-auto" />
         </section>
         <section class="flex flex-column mb-1">
           <label>{{ $t("clientes.telefono") }}</label>

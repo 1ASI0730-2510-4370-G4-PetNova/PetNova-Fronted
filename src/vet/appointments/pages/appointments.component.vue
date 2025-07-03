@@ -20,7 +20,7 @@
         </section>
         <section class="flex flex-column mb-1">
           <label>{{ $t('citas.inicio') }}</label>
-          <PvInputText v-model="newAppointment.startDate" class="flex-auto" />
+          <PvInputText v-model="newAppointment.appointmentDate" class="flex-auto" />
         </section>
         <section class="flex flex-column mb-1">
           <label>{{ $t('citas.cliente') }}</label>

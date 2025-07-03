@@ -23,7 +23,7 @@
               alt="avatar"
               class="avatar"
             />
-            {{ client.fullName }}
+            {{ client.firstName }}
           </section>
         </td>
         <td>{{ client.phone }}</td>
@@ -86,7 +86,7 @@
     <section>
       <section class="flex flex-column mb-1">
         <label>{{ $t("clientes.nombre") }}</label>
-        <PvInputText v-model="editedClient.fullName" class="flex-auto" />
+        <PvInputText v-model="editedClient.firstName" class="flex-auto" />
       </section>
       <section class="flex flex-column mb-1">
         <label>{{ $t("clientes.telefono") }}</label>
