@@ -22,9 +22,9 @@
         </section>
         <section class="button-container">
           <section class="radio-buttons">
-            <input type="radio" id="admin" value="admin" v-model="role" required />
+            <input type="radio" id="Admin" value="Admin" v-model="role" required />
             <label for="client">{{ $t('signup.options.option1') }}</label>
-            <input type="radio" id="client" value="client" v-model="role" required />
+            <input type="radio" id="Client" value="Client" v-model="role" required />
             <label for="admin">{{ $t('signup.options.option2') }}</label>
           </section>
         </section>
@@ -49,7 +49,7 @@ const password = ref('');
 const role = ref('admin');
 
 const handleRegister = async () => {
-  const newUser = new User({ email: email.value, username: username.value, password: password.value, role: role.value });
+  const newUser = new User({ email: email.value, username: username.value, password: password.value, role: role.value.charAt(0).toUpperCase() + role.value.slice(1).toLowerCase() });
 
   if (!User.isValid(newUser)) {
     return;

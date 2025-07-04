@@ -25,12 +25,26 @@
 
 <script setup>
 import { ref } from 'vue';
-import {loginUser} from '../services/user.service';
+import { loginUser } from '../services/user.service';
 import { useRouter } from 'vue-router';
 
 const usernameOrEmail = ref('');
 const password = ref('');
 const router = useRouter();
+
+// 🔸 FUNCION AUXILIAR PARA DECODIFICAR EL JWT
+function parseJwt(token) {
+  try {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    return JSON.parse(decodeURIComponent(atob(base64).split('').map(function(c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join('')));
+  } catch (e) {
+    console.error('Error al decodificar el token:', e);
+    return {};
+  }
+}
 
 const handleLogin = async () => {
   if (!usernameOrEmail.value || !password.value) {
@@ -43,19 +57,33 @@ const handleLogin = async () => {
       password: password.value
     };
 
-    const user = await loginUser(loginData); // Este debe llamar al endpoint backend
+    const response = await loginUser(loginData); // Esperamos token o user con token
+    const token = response.token;
 
-    if (user.role === 'client') {
+    // 🔍 ACA DECODEAMOS EL TOKEN Y LO MOSTRAMOS EN CONSOLA
+    const decodedToken = parseJwt(token);
+    console.log('Token decodificado:', decodedToken);
+
+    const role =
+        decodedToken.role ||
+        decodedToken.Role ||
+        decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+
+    console.log('Rol decodificado:', role);
+
+    if (role === 'Client') {
       router.push('/profileClients');
-    } else if (user.role === 'admin' || user.role === 'vet') {
+    } else if (role === 'Admin' || role === 'vet') {
       router.push('/profile');
+    } else {
+      console.warn('Rol no reconocido:', role);
     }
   } catch (error) {
     console.error('Usuario o contraseña incorrectos o error al iniciar sesión:', error);
   }
 };
-
 </script>
+
 
 <style scoped>
 .login-text-container {
