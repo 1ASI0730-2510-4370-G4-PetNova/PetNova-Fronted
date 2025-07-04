@@ -7,7 +7,7 @@
     <form @submit.prevent="handleLogin" class="login-form">
       <div class="input">
         <img src="../../assets/images/email-icon.png" alt="email" class="email-icon" />
-        <input v-model="email" type="email" :placeholder="$t('login.correo')" required />
+        <input v-model="usernameOrEmail" type="email" :placeholder="$t('login.correo')" required />
       </div>
       <div class="input">
         <img src="../../assets/images/password-icon.png" alt="password" class="password-icon" />
@@ -25,38 +25,33 @@
 
 <script setup>
 import { ref } from 'vue';
-import { getUsers } from '../services/user.service';
+import {loginUser} from '../services/user.service';
 import { useRouter } from 'vue-router';
 
-const email = ref('');
+const usernameOrEmail = ref('');
 const password = ref('');
 const router = useRouter();
 
 const handleLogin = async () => {
-  if (!email.value || !password.value) {
+  if (!usernameOrEmail.value || !password.value) {
     return;
   }
 
   try {
-    const users = await getUsers();  // Obtiene todos los usuarios
-    const foundUser = users.find(
-      user => user.email === email.value && user.password === password.value  // Busca el usuario con el correo y la contraseña
-    );
+    const loginData = {
+      usernameOrEmail: usernameOrEmail.value,
+      password: password.value
+    };
 
-    if (foundUser) {
-      // Si el rol es 'client', redirige a la página de clientes
-      if (foundUser.role === 'client') {
-        router.push('/profileClients');  // Redirige al perfil del cliente
-      }
-      // Si el rol es 'admin' o 'vet', redirige a la página común
-      else if (foundUser.role === 'admin' || foundUser.role === 'vet') {
-        router.push('/profile');  // Redirige a la página común para admin y vet
-      }
-    } else {
-      console.error('Usuario o contraseña incorrectos');
+    const user = await loginUser(loginData); // Este debe llamar al endpoint backend
+
+    if (user.role === 'client') {
+      router.push('/profileClients');
+    } else if (user.role === 'admin' || user.role === 'vet') {
+      router.push('/profile');
     }
   } catch (error) {
-    console.error('Error al iniciar sesión:', error);
+    console.error('Usuario o contraseña incorrectos o error al iniciar sesión:', error);
   }
 };
 
