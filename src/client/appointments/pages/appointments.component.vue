@@ -32,14 +32,13 @@
             <th>{{ $t("citas.inicio") }}</th>
             <th>{{ $t("citas.cliente") }}</th>
             <th>{{ $t("citas.numero") }}</th>
-            <th>{{ $t("citas.estado") }}</th>
             <th>{{ $t("citas.tipo-evento") }}</th>
             <th>{{ $t("citas.acciones") }}</th>
           </tr>
         </thead>
         <tbody>
           <tr v-if="paginatedAppointments.length === 0">
-            <td colspan="7" class="no-data">{{ $t("citas.no-disponible") }}</td>
+            <td colspan="6" class="no-data">{{ $t("citas.no-disponible") }}</td>
           </tr>
           <tr
             v-for="appointment in paginatedAppointments"
@@ -58,7 +57,6 @@
             <td>{{ appointment.startDate }}</td>
             <td>{{ appointment.client }}</td>
             <td>{{ appointment.contactNumber }}</td>
-            <td>{{ appointment.status }}</td>
             <td>{{ appointment.eventType }}</td>
             <td class="label-actions">
               <span
@@ -145,10 +143,6 @@
             class="flex-auto"
           />
         </section>
-        <section class="flex flex-column mb-1">
-          <label>{{ $t("citas.estado") }}</label>
-          <PvInputText v-model="newAppointment.status" class="flex-auto" />
-        </section>
         <section class="flex flex-column">
           <label>{{ $t("citas.tipo-evento") }}</label>
           <PvInputText v-model="newAppointment.eventType" class="flex-auto" />
@@ -190,7 +184,6 @@ const newAppointment = ref({
   startDate: "",
   client: "",
   contactNumber: "",
-  status: "",
   eventType: "",
 });
 const addAppointmentDialogVisible = ref(false);
@@ -217,7 +210,6 @@ const isValidAppointment = (appointment) => {
     appointment.startDate &&
     appointment.client &&
     appointment.contactNumber &&
-    appointment.status &&
     appointment.eventType
   );
 };
