@@ -10,6 +10,7 @@ import appointmentsClients from "@/client/appointments/pages/appointments.compon
 import profileComponentClients from "@/client/profile/pages/profile.component.vue";
 import dashboard from "@/client/dashboard/pages/dashboardpage.component.vue";
 import dashvet from "@/vet/dashboard/pages/dashvet.component.vue";
+import notFoundComponent from "@/shared/pages/404.component.vue";
 
 const routes = [
   { path: "/", component: loginComponent },
@@ -49,6 +50,7 @@ const routes = [
   { path: "/profileClients", component: profileComponentClients },
   { path: "/dashboard", component: dashboard },
   { path: "/dashboard/vet", component: dashvet },
+  { path: "/:pathMatch(.*)*", name: "NotFound", component: notFoundComponent },
 ];
 
 const router = createRouter({

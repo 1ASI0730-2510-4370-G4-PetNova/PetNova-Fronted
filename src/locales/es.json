@@ -102,21 +102,39 @@
     "allergy-reaction-desc": "Irritación de la piel. Se recetaron antihistamínicos."
   },
   "dashboard": {
-    "vitalStatus": "Estado Vital",
-    "appointmentsToday": "Citas de Hoy",
-    "collarStatus": "Estado del Collar",
-    "realTimeLocation": "Ubicación en Tiempo Real",
-    "check-up": "Chequeo",
-    "surgery": "Cirugía",
-    "vaccination": "Vacunación",
-    "totalClients": "Total de Clientes",
-    "totalStaff": "Total de Personal",
-    "totalRooms": "Total de Habitaciones",
-    "latestPatients": "Pacientes Recientes",
-    "weeklyReport": "Informe Semanal 💰",
-    "income": "Ingresos",
-    "outcome": "Egresos",
-    "clientNotifications": "Notificaciones de Clientes 🔔"
+    "titulo": "Panel de Control",
+    "bienvenida": "Bienvenido a PetNova",
+    "resumen": "Resumen de actividad",
+    "mascotas-activas": "Mascotas Activas",
+    "citas-hoy": "Citas Hoy",
+    "alertas": "Alertas",
+    "ver-todo": "Ver Todo",
+    "sin-datos": "Sin datos disponibles",
+    "iot": {
+      "titulo": "Monitoreo IoT",
+      "temperatura": "Temperatura",
+      "frecuencia": "Frecuencia Cardíaca",
+      "bateria": "Batería",
+      "wifi": "WiFi",
+      "pasos": "Pasos Hoy",
+      "calorias": "Calorías"
+    },
+    "vet": {
+      "titulo": "Panel Veterinario",
+      "estadisticas": "Estadísticas",
+      "pacientes": "Pacientes Recientes",
+      "finanzas": "Reporte Financiero",
+      "notificaciones": "Notificaciones",
+      "clientes-totales": "Clientes Totales",
+      "citas-mes": "Citas del Mes",
+      "ingresos": "Ingresos",
+      "mascotas-registradas": "Mascotas Registradas"
+    }
+  },
+  "404": {
+    "titulo": "¡Ups! Página no encontrada",
+    "descripcion": "La página que buscas no existe. Parece que tu mascota se ha perdido en el ciberespacio.",
+    "volver-atras": "Volver atrás"
   },
   "contactenos": "Contáctenos"
 }

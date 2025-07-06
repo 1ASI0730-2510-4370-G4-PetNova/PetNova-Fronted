@@ -102,21 +102,39 @@
     "allergy-reaction-desc": "Skin irritation. Prescribed antihistamines."
   },
   "dashboard": {
-    "vitalStatus": "Vital Status",
-    "appointmentsToday": "Appointments Today",
-    "collarStatus": "Collar Status",
-    "realTimeLocation": "Real-Time Location",
-    "check-up": "Check-up",
-    "surgery": "Surgery",
-    "vaccination": "Vaccination",
-    "totalClients": "Total Clients",
-    "totalStaff": "Total Staff",
-    "totalRooms": "Total Rooms",
-    "latestPatients": "Latest Patients",
-    "weeklyReport": "Weekly Report 💰",
-    "income": "Income",
-    "outcome": "Outcome",
-    "clientNotifications": "Client Notifications 🔔"
+    "titulo": "Dashboard",
+    "bienvenida": "Welcome to PetNova",
+    "resumen": "Activity Summary",
+    "mascotas-activas": "Active Pets",
+    "citas-hoy": "Today's Appointments",
+    "alertas": "Alerts",
+    "ver-todo": "View All",
+    "sin-datos": "No data available",
+    "iot": {
+      "titulo": "IoT Monitoring",
+      "temperatura": "Temperature",
+      "frecuencia": "Heart Rate",
+      "bateria": "Battery",
+      "wifi": "WiFi",
+      "pasos": "Steps Today",
+      "calorias": "Calories"
+    },
+    "vet": {
+      "titulo": "Veterinary Dashboard",
+      "estadisticas": "Statistics",
+      "pacientes": "Recent Patients",
+      "finanzas": "Financial Report",
+      "notificaciones": "Notifications",
+      "clientes-totales": "Total Clients",
+      "citas-mes": "Monthly Appointments",
+      "ingresos": "Revenue",
+      "mascotas-registradas": "Registered Pets"
+    }
+  },
+  "404": {
+    "titulo": "Oops! Page Not Found",
+    "descripcion": "The page you're looking for doesn't exist. It seems your pet got lost in cyberspace.",
+    "volver-atras": "Go back"
   },
   "contactenos": "Contact us"
 }
