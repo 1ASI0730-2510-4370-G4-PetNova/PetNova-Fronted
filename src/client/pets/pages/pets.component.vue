@@ -33,13 +33,12 @@
             <th>{{ $t("mascotas.registro") }}</th>
             <th>{{ $t("mascotas.raza") }}</th>
             <th>{{ $t("mascotas.genero") }}</th>
-            <th>{{ $t("mascotas.hc") }}</th>
             <th>{{ $t("mascotas.acciones") }}</th>
           </tr>
         </thead>
         <tbody>
           <tr v-if="paginatedPets.length === 0">
-            <td colspan="7" class="no-data">
+            <td colspan="6" class="no-data">
               {{ $t("mascotas.no-disponible") }}
             </td>
           </tr>
@@ -58,7 +57,6 @@
             <td>{{ pet.registrationDate }}</td>
             <td>{{ pet.animalBreed }}</td>
             <td>{{ pet.gender }}</td>
-            <td>{{ pet.hc }}</td>
             <td class="label-actions">
               <span @click="editPet(pet)" class="label-edit-action">
                 <span>{{ $t("mascotas.editar") }}</span>
@@ -139,10 +137,6 @@
           <label>{{ $t("mascotas.genero") }}</label>
           <PvInputText v-model="newPet.gender" class="flex-auto" />
         </section>
-        <section class="flex flex-column">
-          <label>{{ $t("mascotas.hc") }}</label>
-          <PvInputText v-model="newPet.hc" class="flex-auto" />
-        </section>
       </section>
       <template #footer>
         <PvButton
@@ -178,7 +172,6 @@ const newPet = ref({
   registrationDate: "",
   animalBreed: "",
   gender: "",
-  hc: "",
 });
 const addPetDialogVisible = ref(false);
 const currentPage = ref(1);
@@ -212,7 +205,6 @@ const savePet = async () => {
     registrationDate: "",
     animalBreed: "",
     gender: "",
-    hc: "",
   };
   await fetchPets();
 };
@@ -223,8 +215,7 @@ const isValidPet = (pet) => {
     pet.birdDate &&
     pet.registrationDate &&
     pet.animalBreed &&
-    pet.gender &&
-    pet.hc
+    pet.gender
   );
 };
 
