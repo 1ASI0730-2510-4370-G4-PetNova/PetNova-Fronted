@@ -7,13 +7,12 @@
         <th>{{ $t("mascotas.registro") }}</th>
         <th>{{ $t("mascotas.raza") }}</th>
         <th>{{ $t("mascotas.genero") }}</th>
-        <th>{{ $t("mascotas.hc") }}</th>
         <th>{{ $t("mascotas.acciones") }}</th>
       </tr>
     </thead>
     <tbody>
       <tr v-if="paginatedPets.length === 0">
-        <td colspan="8" class="no-data">{{ $t("mascotas.no-disponible") }}</td>
+        <td colspan="6" class="no-data">{{ $t("mascotas.no-disponible") }}</td>
       </tr>
       <tr v-for="pet in paginatedPets" :key="pet.id">
         <td>
@@ -36,7 +35,6 @@
         <td>{{ pet.registrationDate }}</td>
         <td>{{ pet.breed }}</td>
         <td>{{ pet.gender }}</td>
-        <td>{{ pet.hc }}</td>
         <td class="label-actions">
           <span @click="openEditDialog(pet)" class="label-edit-action">
             <span>{{ $t("mascotas.editar") }}</span>
@@ -109,10 +107,6 @@
       <section class="flex flex-column mb-1">
         <label>{{ $t("mascotas.genero") }}</label>
         <PvInputText v-model="editedPet.gender" class="flex-auto" />
-      </section>
-      <section class="flex flex-column">
-        <label>{{ $t("mascotas.hc") }}</label>
-        <PvInputText v-model="editedPet.hc" class="flex-auto" />
       </section>
     </section>
     <template #footer>
@@ -189,8 +183,7 @@ const isValidPet = (pet) => {
     pet.birdDate &&
     pet.registrationDate &&
     pet.animalBreed &&
-    pet.gender &&
-    pet.hc
+    pet.gender
   );
 };
 
