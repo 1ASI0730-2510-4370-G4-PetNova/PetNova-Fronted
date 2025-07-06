@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://app-250703230222.azurewebsites.net';
+const API_URL = 'https://petback-gxdpftdhgxarbxeu.centralus-01.azurewebsites.net/';
 
 export const getUsers = async () => {
   const response = await axios.get(`${API_URL}/api/Auth/users`);
