@@ -35,14 +35,6 @@
           <label>{{ $t("clientes.direccion") }}</label>
           <PvInputText v-model="newClient.address" class="flex-auto" />
         </section>
-        <section class="flex flex-column mb-1">
-          <label>{{ $t("clientes.estado") }}</label>
-          <PvInputText v-model="newClient.status" class="flex-auto" />
-        </section>
-        <section class="flex flex-column">
-          <label>{{ $t("clientes.hc") }}</label>
-          <PvInputText v-model="newClient.hc" class="flex-auto" />
-        </section>
       </section>
       <template #footer>
         <PvButton

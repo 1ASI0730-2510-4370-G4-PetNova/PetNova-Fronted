@@ -6,14 +6,12 @@
         <th>{{ $t("clientes.telefono") }}</th>
         <th>{{ $t("clientes.correo") }}</th>
         <th>{{ $t("clientes.direccion") }}</th>
-        <th>{{ $t("clientes.estado") }}</th>
-        <th>{{ $t("clientes.hc") }}</th>
         <th>{{ $t("clientes.acciones") }}</th>
       </tr>
     </thead>
     <tbody>
       <tr v-if="paginatedClients.length === 0">
-        <td colspan="8" class="no-data">{{ $t("clientes.no-disponible") }}</td>
+        <td colspan="5" class="no-data">{{ $t("clientes.no-disponible") }}</td>
       </tr>
       <tr v-for="client in paginatedClients" :key="client.id">
         <td>
@@ -29,8 +27,6 @@
         <td>{{ client.phone }}</td>
         <td>{{ client.email }}</td>
         <td>{{ client.address }}</td>
-        <td>{{ client.status }}</td>
-        <td>{{ client.hc }}</td>
         <td class="label-actions">
           <span @click="openEditDialog(client)" class="label-edit-action">
             <span>{{ $t("clientes.editar") }}</span>
@@ -99,14 +95,6 @@
       <section class="flex flex-column mb-1">
         <label>{{ $t("clientes.direccion") }}</label>
         <PvInputText v-model="editedClient.address" class="flex-auto" />
-      </section>
-      <section class="flex flex-column mb-1">
-        <label>{{ $t("clientes.estado") }}</label>
-        <PvInputText v-model="editedClient.status" class="flex-auto" />
-      </section>
-      <section class="flex flex-column">
-        <label>{{ $t("clientes.hc") }}</label>
-        <PvInputText v-model="editedClient.hc" class="flex-auto" />
       </section>
     </section>
     <template #footer>
