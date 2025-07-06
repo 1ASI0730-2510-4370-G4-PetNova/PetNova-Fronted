@@ -162,7 +162,7 @@ onMounted(async () => {
   padding: 0.5rem; /* Reducido de 1rem a 0.5rem */
   background-color: #f9fafb;
   height: 100vh;
-  overflow: hidden;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   justify-content: center; /* Centra el contenido verticalmente */
@@ -172,8 +172,8 @@ onMounted(async () => {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  gap: 15px; /* Reducido de 20px a 15px */
-  height: calc(100vh - 6rem); /* Reducido aún más para evitar corte */
-  max-height: 85vh; /* Altura máxima más conservadora */
+  gap: 20px;
+  min-height: calc(100vh - 2rem); /* Altura mínima para asegurar buen tamaño */
+  padding: 1rem 0; /* Padding vertical para mejor espaciado */
 }
 </style>
