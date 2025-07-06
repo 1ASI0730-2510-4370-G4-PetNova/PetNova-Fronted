@@ -34,10 +34,6 @@
           <label>{{ $t('mascotas.genero') }}</label>
           <PvInputText v-model="newPet.gender" class="flex-auto" />
         </section>
-        <section class="flex flex-column">
-          <label>{{ $t('mascotas.hc') }}</label>
-          <PvInputText v-model="newPet.hc" class="flex-auto" />
-        </section>
       </section>
       <template #footer>
         <PvButton :label="$t('mascotas.cancelar')" text severity="secondary" @click="createVisible = false" />

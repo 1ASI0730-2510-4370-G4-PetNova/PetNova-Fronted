@@ -2,6 +2,11 @@
   <article>
     <MenuComponent />
     <section class="main-container">
+      <section class="header-container">
+        <LanguageSwitch />
+        <Notification />
+      </section>
+
       <section class="first-container">
         <div class="language-notification">
           <!-- Espacio para mantener layout similar al admin -->
@@ -32,6 +37,7 @@
             <th>{{ $t("citas.inicio") }}</th>
             <th>{{ $t("citas.cliente") }}</th>
             <th>{{ $t("citas.numero") }}</th>
+            <th>{{ $t("citas.estado") }}</th>
             <th>{{ $t("citas.tipo-evento") }}</th>
             <th>{{ $t("citas.acciones") }}</th>
           </tr>
@@ -57,6 +63,7 @@
             <td>{{ appointment.startDate }}</td>
             <td>{{ appointment.client }}</td>
             <td>{{ appointment.contactNumber }}</td>
+            <td>{{ appointment.status }}</td>
             <td>{{ appointment.eventType }}</td>
             <td class="label-actions">
               <span
@@ -143,6 +150,10 @@
             class="flex-auto"
           />
         </section>
+        <section class="flex flex-column mb-1">
+          <label>{{ $t("citas.estado") }}</label>
+          <PvInputText v-model="newAppointment.status" class="flex-auto" /> 
+        </section>
         <section class="flex flex-column">
           <label>{{ $t("citas.tipo-evento") }}</label>
           <PvInputText v-model="newAppointment.eventType" class="flex-auto" />
@@ -175,6 +186,8 @@ import {
   createAppointment,
 } from "../../../vet/appointments/services/appointment.service";
 import { getClients } from "../../../vet/clients/services/client.service";
+import LanguageSwitch from "../../../shared/components/language-switcher.component.vue";
+import Notification from "../../../vet/appointments/components/notification.component.vue";
 
 const search = ref("");
 const clients = ref([]);
@@ -184,6 +197,7 @@ const newAppointment = ref({
   startDate: "",
   client: "",
   contactNumber: "",
+  status: "", 
   eventType: "",
 });
 const addAppointmentDialogVisible = ref(false);
@@ -210,6 +224,7 @@ const isValidAppointment = (appointment) => {
     appointment.startDate &&
     appointment.client &&
     appointment.contactNumber &&
+    appointment.status &&
     appointment.eventType
   );
 };
@@ -272,11 +287,17 @@ article {
   margin: 0 auto;
   width: 80%;
 }
-
 @media (max-width: 1600px) {
   .main-container {
     overflow-x: auto;
   }
+}
+.header-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  padding: 15px 0;
 }
 
 .first-container {

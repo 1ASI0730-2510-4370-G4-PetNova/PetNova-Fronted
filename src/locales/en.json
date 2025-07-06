@@ -51,7 +51,7 @@
   },
   "mascotas": {
     "agregar": "Add pet",
-    "nombre": "Pet name",
+    "nombre": "Pet's name",
     "cumpleanos": "Bird date",
     "registro": "Registration date",
     "raza": "Animal breed",
@@ -71,7 +71,7 @@
   },
   "citas": {
     "agregar": "Add appointment",
-    "nombre": "Nombre de la mascota",
+    "nombre": "Pet's name",
     "inicio": "Start date",
     "cliente": "Client",
     "numero": "Contact number",

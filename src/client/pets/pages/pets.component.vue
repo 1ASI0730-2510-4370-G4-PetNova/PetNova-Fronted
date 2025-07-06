@@ -2,6 +2,10 @@
   <article>
     <MenuComponent />
     <section class="main-container">
+      <section class="header-container">
+        <LanguageSwitch />
+        <Notification />
+      </section>
       <section class="first-container">
         <div class="language-notification">
           <!-- Espacio para mantener layout similar al admin -->
@@ -162,6 +166,8 @@ import { ref, computed, onMounted } from "vue";
 import MenuComponent from "../../../shared/components/menu-client.component.vue";
 import { getPets, createPet } from "../../../vet/pets/services/pet.service";
 import { getClients } from "../../../vet/clients/services/client.service";
+import LanguageSwitch from "../../../shared/components/language-switcher.component.vue";
+import Notification from "../../../vet/appointments/components/notification.component.vue";
 
 const search = ref("");
 const clients = ref([]);
@@ -263,6 +269,18 @@ article {
   align-items: center;
   margin: 0 auto;
   width: 80%;
+}
+@media (max-width: 1600px) {
+  .main-container {
+    overflow-x: auto;
+  }
+}
+.header-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  padding: 15px 0;
 }
 
 .first-container {

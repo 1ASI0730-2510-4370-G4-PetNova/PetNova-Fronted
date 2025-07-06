@@ -1,5 +1,5 @@
 export default class Pet {
-  constructor({ name = '', species = '', breed = '', dateOfBirth = '', color = '', gender = '', registrationDate = '', hc = '' } = {}) {
+  constructor({ name = '', species = '', breed = '', dateOfBirth = '', color = '', gender = '', registrationDate = '' } = {}) {
     this.name = name;
     this.species = species;
     this.breed = breed;
@@ -7,7 +7,6 @@ export default class Pet {
     this.color = color;
     this.gender = gender;
     this.registrationDate = registrationDate;
-    this.hc = hc;
   }
 
   static isValid(pet) {
