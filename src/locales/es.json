@@ -101,7 +101,14 @@
     "allergy-reaction": "Reacción alérgica",
     "allergy-reaction-desc": "Irritación de la piel. Se recetaron antihistamínicos."
   },
+  "dashboard": {
+    "vitalStatus": "Estado Vital",
+    "appointmentsToday": "Citas de Hoy",
+    "collarStatus": "Estado del Collar",
+    "realTimeLocation": "Ubicación en Tiempo Real",
+    "check-up": "Chequeo",
+    "surgery": "Cirugía",
+    "vaccination": "Vacunación"
+  },
   "contactenos": "Contáctenos"
 }
-
-

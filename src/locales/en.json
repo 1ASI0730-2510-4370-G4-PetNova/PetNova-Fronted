@@ -101,5 +101,14 @@
     "allergy-reaction": "Allergy Reaction",
     "allergy-reaction-desc": "Skin irritation. Prescribed antihistamines."
   },
+  "dashboard": {
+    "vitalStatus": "Vital Status",
+    "appointmentsToday": "Appointments Today",
+    "collarStatus": "Collar Status",
+    "realTimeLocation": "Real-Time Location",
+    "check-up": "Check-up",
+    "surgery": "Surgery",
+    "vaccination": "Vaccination"
+  },
   "contactenos": "Contact us"
 }
