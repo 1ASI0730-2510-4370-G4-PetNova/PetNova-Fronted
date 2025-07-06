@@ -9,6 +9,7 @@ import petsClients from "@/client/pets/pages/pets.component.vue";
 import appointmentsClients from "@/client/appointments/pages/appointments.component.vue";
 import profileComponentClients from "@/client/profile/pages/profile.component.vue";
 import dashboard from "@/client/dashboard/pages/dashboardpage.component.vue";
+import dashvet from "@/vet/dashboard/pages/dashvet.component.vue";
 
 const routes = [
   { path: "/", component: loginComponent },
@@ -47,6 +48,7 @@ const routes = [
   { path: "/appointmentsClients", component: appointmentsClients },
   { path: "/profileClients", component: profileComponentClients },
   { path: "/dashboard", component: dashboard },
+  { path: "/dashboard/vet", component: dashvet },
 ];
 
 const router = createRouter({

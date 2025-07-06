@@ -108,7 +108,15 @@
     "realTimeLocation": "Ubicación en Tiempo Real",
     "check-up": "Chequeo",
     "surgery": "Cirugía",
-    "vaccination": "Vacunación"
+    "vaccination": "Vacunación",
+    "totalClients": "Total de Clientes",
+    "totalStaff": "Total de Personal",
+    "totalRooms": "Total de Habitaciones",
+    "latestPatients": "Pacientes Recientes",
+    "weeklyReport": "Informe Semanal 💰",
+    "income": "Ingresos",
+    "outcome": "Egresos",
+    "clientNotifications": "Notificaciones de Clientes 🔔"
   },
   "contactenos": "Contáctenos"
 }

@@ -108,7 +108,15 @@
     "realTimeLocation": "Real-Time Location",
     "check-up": "Check-up",
     "surgery": "Surgery",
-    "vaccination": "Vaccination"
+    "vaccination": "Vaccination",
+    "totalClients": "Total Clients",
+    "totalStaff": "Total Staff",
+    "totalRooms": "Total Rooms",
+    "latestPatients": "Latest Patients",
+    "weeklyReport": "Weekly Report 💰",
+    "income": "Income",
+    "outcome": "Outcome",
+    "clientNotifications": "Client Notifications 🔔"
   },
   "contactenos": "Contact us"
 }
