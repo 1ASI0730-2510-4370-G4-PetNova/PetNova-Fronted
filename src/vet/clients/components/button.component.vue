@@ -1,8 +1,10 @@
 <template>
-  <span class="button" @click="$emit('add-click')">{{
-    $t("clientes.agregar")
-  }}</span>
+  <span class="button" @click="$emit('add-click')">
+    {{ $t("clientes.agregar") }}
+  </span>
 </template>
+
+<script setup></script>
 
 <style scoped>
 .button {
@@ -10,5 +12,6 @@
   padding: 10px 40px;
   background-color: #eaf7fc;
   border-radius: 10px;
+  cursor: pointer;
 }
 </style>

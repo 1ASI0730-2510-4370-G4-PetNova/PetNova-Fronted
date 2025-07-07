@@ -1,31 +1,19 @@
 export default class Client {
   constructor({
-    firstName = "",
+                id = null,
+                firstName = "",
                 lastName = "",
                 email = "",
-    phone = "",
-    address = "",
-    status = "",
-    hc = "",
-  } = {}) {
+                phone = "",
+              } = {}) {
+    this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.phone = phone;
-    this.address = address;
-    this.status = status;
-    this.hc = hc;
   }
 
   static isValid(client) {
-    return (
-      client.firstName &&
-      client.lastName &&
-      client.phone &&
-      client.email &&
-      client.address &&
-      client.status &&
-      client.hc
-    );
+    return client.firstName && client.lastName && client.phone && client.email;
   }
 }

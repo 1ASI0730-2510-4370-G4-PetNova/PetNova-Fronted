@@ -1,25 +1,36 @@
 export default class Appointment {
-  constructor({ petName = '', appointmentDate = '', client = '', reason = '', contactNumber = '', status = '', eventType = '', notes = '' } = {}) {
+  constructor({
+                id = '',
+                petId = '',
+                petName = '',
+                clientId = '',
+                clientName = '',
+                contactNumber = '',
+                startDate = '',
+                status = 0,
+                type = 0,
+              } = {}) {
+    this.id = id;
+    this.petId = petId;
     this.petName = petName;
-    this.appointmentDate = appointmentDate;
-    this.client = client;
-    this.reason = reason;
+    this.clientId = clientId;
+    this.clientName = clientName;
     this.contactNumber = contactNumber;
+    this.startDate = startDate;
     this.status = status;
-    this.eventType = eventType;
-    this.notes = notes;
+    this.type = type;
   }
 
   static isValid(appointment) {
     return (
-      appointment.petName &&
-      appointment.appointmentDate &&
-      appointment.client &&
-      appointment.reason &&
-      appointment.contactNumber &&
-      appointment.status &&
-      appointment.eventType &&
-      appointment.notes
+        appointment.petId &&
+        appointment.clientId &&
+        appointment.petName &&
+        appointment.clientName &&
+        appointment.contactNumber &&
+        appointment.startDate !== '' &&
+        typeof appointment.status === 'number' &&
+        typeof appointment.type === 'number'
     );
   }
 }

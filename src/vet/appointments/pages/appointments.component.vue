@@ -6,51 +6,71 @@
         <LanguageSwitch />
         <Notification />
       </section>
+
       <section class="second-container">
-        <Searcher @appointment-found="handleSearchResults" />
-        <Button @add-click="openAddDialog" />
+        <Searcher @appointment-found="filteredAppointments = $event" />
+        <Button @add-click="createVisible = true" />
       </section>
-      <TableComponent :appointments="filteredAppointments" :search="search" />
+
+      <TableComponent
+          :appointments="filteredAppointments"
+          @edit="openEditDialog"
+          @delete="openDeleteDialog"
+      />
     </section>
+
+    <!-- CREAR CITA -->
     <PvDialog v-model:visible="createVisible" modal :header="$t('citas.crear-cita')" :style="{ width: '25rem' }">
       <section>
-        <section class="flex flex-column mb-1">
-          <label>{{ $t('citas.nombre') }}</label>
-          <PvInputText v-model="newAppointment.petName" class="flex-auto" />
-        </section>
-        <section class="flex flex-column mb-1">
-          <label>{{ $t('citas.inicio') }}</label>
-          <PvInputText v-model="newAppointment.appointmentDate" class="flex-auto" />
-        </section>
-        <section class="flex flex-column mb-1">
-          <label>{{ $t('citas.cliente') }}</label>
-          <PvInputText v-model="newAppointment.client" class="flex-auto" />
-        </section>
-        <section class="flex flex-column mb-1">
-          <label>{{ $t('citas.numero') }}</label>
-          <PvInputText v-model="newAppointment.contactNumber" class="flex-auto" />
-        </section>
-        <section class="flex flex-column mb-1">
-          <label>{{ $t('citas.estado') }}</label>
-          <PvInputText v-model="newAppointment.status" class="flex-auto" />
-        </section>
-        <section class="flex flex-column">
-          <label>{{ $t('citas.tipo-evento') }}</label>
-          <PvInputText v-model="newAppointment.eventType" class="flex-auto" />
-        </section>
+        <PvInputText v-model="newAppointment.petName" placeholder="Nombre Mascota" />
+        <PvInputText v-model="newAppointment.clientName" placeholder="Nombre Cliente" />
+        <PvInputText v-model="newAppointment.contactNumber" placeholder="Teléfono" />
+        <PvInputText v-model="newAppointment.startDate" placeholder="Fecha de inicio" />
+        <PvInputText v-model="newAppointment.status" placeholder="Estado" />
+        <PvInputText v-model="newAppointment.type" placeholder="Tipo de evento" />
       </section>
       <template #footer>
-        <PvButton :label="$t('citas.cancelar')" text severity="secondary" @click="createVisible = false" />
-        <PvButton :label="$t('citas.guardar')" outlined severity="danger" @click="createAppointment" :disabled="!isValidAppointment(newAppointment)" />
+        <PvButton :label="$t('citas.cancelar')" @click="createVisible = false" />
+        <PvButton :label="$t('citas.guardar')" @click="createAppointment" :disabled="!isValidAppointment(newAppointment)" />
+      </template>
+    </PvDialog>
+
+    <!-- EDITAR CITA -->
+    <PvDialog v-model:visible="editVisible" modal :header="$t('citas.editar-cita')" :style="{ width: '25rem' }">
+      <section>
+        <PvInputText v-model="editedAppointment.petName" placeholder="Nombre Mascota" />
+        <PvInputText v-model="editedAppointment.clientName" placeholder="Nombre Cliente" />
+        <PvInputText v-model="editedAppointment.contactNumber" placeholder="Teléfono" />
+        <PvInputText v-model="editedAppointment.startDate" placeholder="Fecha de inicio" />
+        <PvInputText v-model="editedAppointment.status" placeholder="Estado" />
+        <PvInputText v-model="editedAppointment.type" placeholder="Tipo de evento" />
+      </section>
+      <template #footer>
+        <PvButton :label="$t('citas.cancelar')" @click="editVisible = false" />
+        <PvButton :label="$t('citas.guardar')" @click="saveAppointment" :disabled="!isValidAppointment(editedAppointment)" />
+      </template>
+    </PvDialog>
+
+    <!-- ELIMINAR CITA -->
+    <PvDialog v-model:visible="deleteVisible" modal :header="$t('citas.eliminar-cita')" :style="{ width: '25rem' }">
+      <p>{{ $t("citas.estas-seguro") }}</p>
+      <template #footer>
+        <PvButton :label="$t('citas.cancelar')" @click="deleteVisible = false" />
+        <PvButton :label="$t('citas.eliminar')" @click="confirmDelete" />
       </template>
     </PvDialog>
   </article>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { createAppointment as createAppointmentService} from '../services/appointment.service.js';
+import { ref, onMounted } from 'vue';
 import Appointment from '../models/appointment.model.js';
+import {
+  getAppointments,
+  createAppointment as createAppointmentService,
+  updateAppointment,
+  deleteAppointment
+} from '../services/appointment.service.js';
 
 import MenuComponent from '../../../shared/components/menu.component.vue';
 import TableComponent from '../components/table.component.vue';
@@ -59,31 +79,58 @@ import Button from '../components/button.component.vue';
 import Notification from '../components/notification.component.vue';
 import LanguageSwitch from '../../../shared/components/language-switcher.component.vue';
 
-const createVisible = ref(false);
-const newAppointment = ref(new Appointment());
+const appointments = ref([]);
 const filteredAppointments = ref([]);
-const search = ref('');
+const newAppointment = ref(new Appointment());
+const editedAppointment = ref(new Appointment());
+const appointmentToDelete = ref(null);
+
+const createVisible = ref(false);
+const editVisible = ref(false);
+const deleteVisible = ref(false);
 
 const isValidAppointment = (appointment) => Appointment.isValid(appointment);
 
-const openAddDialog = () => {
-  createVisible.value = true;
+const fetchAppointments = async () => {
+  const { data } = await getAppointments();
+  appointments.value = data;
+  filteredAppointments.value = data;
 };
 
 const createAppointment = async () => {
-  if (!isValidAppointment(newAppointment.value)) return;
   await createAppointmentService(newAppointment.value);
-  window.location.reload()
-  createVisible.value = false;
   newAppointment.value = new Appointment();
+  createVisible.value = false;
+  await fetchAppointments();
 };
 
-const handleSearchResults = (results) => {
-  filteredAppointments.value = results;
+const openEditDialog = (appointment) => {
+  editedAppointment.value = { ...appointment };
+  editVisible.value = true;
 };
+
+const saveAppointment = async () => {
+  await updateAppointment(editedAppointment.value);
+  editVisible.value = false;
+  await fetchAppointments();
+};
+
+const openDeleteDialog = (appointment) => {
+  appointmentToDelete.value = appointment;
+  deleteVisible.value = true;
+};
+
+const confirmDelete = async () => {
+  await deleteAppointment(appointmentToDelete.value.id);
+  deleteVisible.value = false;
+  await fetchAppointments();
+};
+
+onMounted(fetchAppointments);
 </script>
 
 <style scoped>
+/* igual que el original */
 article {
   display: flex;
   width: 100%;
@@ -122,7 +169,6 @@ article {
   box-shadow: none;
   border-color: inherit;
 }
-
 .p-inputtext:hover {
   outline: none;
   box-shadow: none;
