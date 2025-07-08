@@ -72,9 +72,9 @@ const handleLogin = async () => {
     console.log('Rol decodificado:', role);
 
     if (role === 'Client') {
-      router.push('/profileClients');
+      router.push('/dashboard');
     } else if (role === 'Admin' || role === 'vet') {
-      router.push('/profile');
+      router.push('/dashboard/vet');
     } else {
       console.warn('Rol no reconocido:', role);
     }
