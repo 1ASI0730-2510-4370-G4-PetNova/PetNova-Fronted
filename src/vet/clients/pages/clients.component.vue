@@ -13,7 +13,7 @@
       </section>
 
       <TableComponent
-          :clients="filteredClients"
+          :clients="filteredClients.length > 0 ? filteredClients : clients"
           @edit="openEditDialog"
           @delete="openDeleteDialog"
       />
@@ -22,10 +22,10 @@
     <!-- CREAR CLIENTE -->
     <PvDialog v-model:visible="createVisible" modal :header="$t('clientes.crear-cliente')" :style="{ width: '25rem' }">
       <section>
-        <PvInputText v-model="newClient.firstName" placeholder="Nombre" />
-        <PvInputText v-model="newClient.lastName" placeholder="Apellido" />
-        <PvInputText v-model="newClient.phone" placeholder="Teléfono" />
-        <PvInputText v-model="newClient.email" placeholder="Email" />
+        <PvInputText v-model="newClient.firstName" :placeholder="$t('clientes.nombre')" />
+        <PvInputText v-model="newClient.lastName" :placeholder="$t('clientes.apellido')" />
+        <PvInputText v-model="newClient.phone" :placeholder="$t('clientes.telefono')" />
+        <PvInputText v-model="newClient.email" :placeholder="$t('clientes.correo')" />
       </section>
       <template #footer>
         <PvButton :label="$t('clientes.cancelar')" @click="createVisible = false" />
@@ -36,10 +36,10 @@
     <!-- EDITAR CLIENTE -->
     <PvDialog v-model:visible="editVisible" modal :header="$t('clientes.editar-cliente')" :style="{ width: '25rem' }">
       <section>
-        <PvInputText v-model="editedClient.firstName" placeholder="Nombre" />
-        <PvInputText v-model="editedClient.lastName" placeholder="Apellido" />
-        <PvInputText v-model="editedClient.phone" placeholder="Teléfono" />
-        <PvInputText v-model="editedClient.email" placeholder="Email" />
+        <PvInputText v-model="editedClient.firstName" :placeholder="$t('clientes.nombre')" />
+        <PvInputText v-model="editedClient.lastName" :placeholder="$t('clientes.apellido')" />
+        <PvInputText v-model="editedClient.phone" :placeholder="$t('clientes.telefono')" />
+        <PvInputText v-model="editedClient.email" :placeholder="$t('clientes.correo')" />
       </section>
       <template #footer>
         <PvButton :label="$t('clientes.cancelar')" @click="editVisible = false" />
@@ -88,16 +88,27 @@ const deleteVisible = ref(false);
 const isValidClient = (client) => Client.isValid(client);
 
 const fetchClients = async () => {
-  const { data } = await getClients();
-  clients.value = data;
-  filteredClients.value = data;
+  try {
+    const { data } = await getClients();
+    clients.value = data;
+    filteredClients.value = data;
+  } catch (error) {
+    console.error("Error fetching clients:", error);
+    Notification.error($t("clientes.error-cargar"));
+  }
 };
 
 const createClient = async () => {
-  await createClientService(newClient.value);
-  newClient.value = new Client();
-  createVisible.value = false;
-  await fetchClients();
+  try {
+    await createClientService(newClient.value);
+    newClient.value = new Client();
+    createVisible.value = false;
+    await fetchClients();
+    Notification.success($t("clientes.creado-exito"));
+  } catch (error) {
+    console.error("Error creating client:", error);
+    Notification.error($t("clientes.error-crear"));
+  }
 };
 
 const openEditDialog = (client) => {
@@ -106,9 +117,15 @@ const openEditDialog = (client) => {
 };
 
 const saveClient = async () => {
-  await updateClient(editedClient.value);
-  editVisible.value = false;
-  await fetchClients();
+  try {
+    await updateClient(editedClient.value);
+    editVisible.value = false;
+    await fetchClients();
+    Notification.success($t("clientes.actualizado-exito"));
+  } catch (error) {
+    console.error("Error updating client:", error);
+    Notification.error($t("clientes.error-actualizar"));
+  }
 };
 
 const openDeleteDialog = (client) => {
@@ -117,9 +134,15 @@ const openDeleteDialog = (client) => {
 };
 
 const confirmDelete = async () => {
-  await deleteClient(clientToDelete.value.id);
-  deleteVisible.value = false;
-  await fetchClients();
+  try {
+    await deleteClient(clientToDelete.value.id);
+    deleteVisible.value = false;
+    await fetchClients();
+    Notification.success($t("clientes.eliminado-exito"));
+  } catch (error) {
+    console.error("Error deleting client:", error);
+    Notification.error($t("clientes.error-eliminar"));
+  }
 };
 
 onMounted(fetchClients);

@@ -1,11 +1,11 @@
 export default class Client {
   constructor({
-                id = null,
-                firstName = "",
-                lastName = "",
-                email = "",
-                phone = "",
-              } = {}) {
+    id = null,
+    firstName = "",
+    lastName = "",
+    email = "",
+    phone = "",
+  } = {}) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
